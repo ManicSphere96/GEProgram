@@ -23,7 +23,7 @@ namespace myengine
 	std::shared_ptr<Environment> Component::getEnvironment()
 	{
 		/// Returns the environment
-		return getCore()->getEnvironment(unique);
+		return getCore()->getEnvironment();
 	}
 
 	std::shared_ptr<Keyboard> Component::getKeyboard()
