@@ -1,33 +1,18 @@
 ﻿cmake_minimum_required(VERSION 3.0)
 project(MYENGINE)
 
-include_directories(
-	src # For myengine.h
-	sdk # For glm.hpp
-)
+include_directories(sdk/Include src/renderer src/myengine)
 
-if(MSVC)
-	include_directories(
-		sdk/Include/SDL # For SDL.h
-		sdk/Include # For glew.h
-		sdk/Include # For glew.h
-	)
+link_directories(${CMAKE_SOURCE_DIR}/sdk/Lib)
 
-	link_directories(
-		${CMAKE_SOURCE_DIR}/sdk/Lib
-		${CMAKE_SOURCE_DIR}/sdk/Lib
-		${CMAKE_SOURCE_DIR}/sdk/Lib
-	)
+link_libraries(glew32 OpenGL32 SDL2 OpenAL32)
 
-	set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SAFESEH:NO")
-else()
-	# Linux, Emscripten, macOS equivalents
-endif()
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SAFESEH:NO")
+
 
 # Avoid the weird SDL2main hack
-if (MSVC)
-	add_definitions(-DSDL_MAIN_HANDLED)
-endif()
+add_definitions(-DSDL_MAIN_HANDLED)
+
 
 add_library(renderer
    src/renderer/renderer.cpp
@@ -41,11 +26,11 @@ add_library(renderer
    src/renderer/VertexBuffer.h
    src/renderer/Texture.h
    src/renderer/Sampler.h
-   src/renderer/bugl.h
+   src/renderer/bugl2.h
    src/renderer/stb_image.h
 )
 
-target_link_libraries(renderer glew32 OpenGL32)
+target_link_libraries(renderer)
 
 add_library(myengine
  	src/myengine/Core.cpp
@@ -78,7 +63,7 @@ add_library(myengine
 	src/myengine/stb_vorbis.c
 )
 
-target_link_libraries(myengine renderer SDL2 openal32)
+target_link_libraries(myengine)
 
 add_executable(game
    src/game/main.cpp

@@ -1,5 +1,6 @@
 #include <iostream>
-#include <myengine/core.h>
+#include <core.h>
+
 
 using namespace myengine;
 

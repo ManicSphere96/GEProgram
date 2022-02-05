@@ -1,16 +1,17 @@
 #pragma once
-#include "Resource.h"
 
-#include <renderer/renderer.h>
+
 #include <iostream>
 #include <string>
 #include <GL/glew.h>
-
+#include <renderer.h>
+#include "Resource.h"
+#include "Component.h"
 namespace myengine
 {
 	struct MeshRenderer;
 
-	struct Model : Resource
+	struct Model : Resource , Component
 	{
 		public:
 			void onInit();

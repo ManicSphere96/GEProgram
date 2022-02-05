@@ -5,19 +5,19 @@
 #include <AL/al.h>
 #include <AL/alc.h>
 
-#include <myengine/Entity.h>
-#include <myengine/Component.h>
-#include <myengine/Screen.h>
+#include "Entity.h"
+#include "Component.h"
+#include "Screen.h"
 //#include <myengine/SphereCollider.h>
-#include <myengine/Environment.h>
-#include <myengine/Keyboard.h>
-#include <myengine/Transform.h>
-#include <myengine/TriangleRenderer.h>
-#include <myengine/Trigger.h>
-#include <myengine/Model.h>
-#include <myengine/Mouse.h>
-#include <myengine/Sound.h>
-#include <myengine/Resource.h>
+#include "Environment.h"
+#include "Keyboard.h"
+#include "Transform.h"
+#include "TriangleRenderer.h"
+#include "Trigger.h"
+#include "Model.h"
+#include "Mouse.h"
+#include "Sound.h"
+#include "Resource.h"
 
 
 namespace myengine

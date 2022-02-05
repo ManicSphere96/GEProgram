@@ -1,6 +1,6 @@
 #include "Component.h"
 
-#include <renderer/renderer.h>
+#include <renderer.h>
 #include <iostream>
 #include <GL/glew.h>
 
