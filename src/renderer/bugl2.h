@@ -110,6 +110,7 @@ size_t loadModel(const std::string& path,
   *normalsId = 0;
 
   std::ifstream file(path.c_str());
+  
 
   if(!file.is_open())
   {

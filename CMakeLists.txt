@@ -76,3 +76,8 @@ add_executable(game
    src/game/test.cpp
 )
 set_target_properties(game PROPERTIES LINK_FLAGS /stack:64000)
+
+file (COPY sdk/Lib/glew32.dll DESTINATION ${CMAKE_BINARY_DIR}/Debug)
+file (COPY sdk/Lib/OpenAL32.dll DESTINATION ${CMAKE_BINARY_DIR}/Debug)
+file (COPY sdk/Lib/SDL2.dll DESTINATION ${CMAKE_BINARY_DIR}/Debug)
+file (COPY Assets/Models/cube.obj DESTINATION ${CMAKE_BINARY_DIR}/Debug)

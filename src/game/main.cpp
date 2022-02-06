@@ -20,7 +20,7 @@ int main()
    std::shared_ptr<Core> core = Core::initialize();
 
    std::shared_ptr<Entity> boxEntityPtr = core->addEntity();
-   boxEntityPtr->addComponent<Model, std::string>("../../Assets/Models/box");
+   boxEntityPtr->addComponent<Model, std::string>("Debug\\cube2");
    
    //std::shared_ptr<Component> component = entity->addComponent<EngineStopper>();
    std::shared_ptr<TriangleRenderer> triangleRenderer = boxEntityPtr->addComponent<TriangleRenderer>();
