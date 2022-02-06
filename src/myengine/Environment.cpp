@@ -1,3 +1,5 @@
+#pragma warning(disable: 26812) // emum type warning
+
 #include "Environment.h"
 #include <SDL2/SDL.h>
 

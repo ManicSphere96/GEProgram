@@ -17,7 +17,7 @@ namespace myengine
 	std::shared_ptr<Entity> Component::getEntity()
 	{
 		/// Returns the entity
-		return entity.lock();
+		return m_Entity.lock();
 	}
 
 	std::shared_ptr<Environment> Component::getEnvironment()

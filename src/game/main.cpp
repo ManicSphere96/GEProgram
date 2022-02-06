@@ -19,14 +19,15 @@ int main()
 
    std::shared_ptr<Core> core = Core::initialize();
 
-   //std::shared_ptr<Environment> environment = 
-
-   std::shared_ptr<Entity> entity = core->addEntity();
+   std::shared_ptr<Entity> boxEntityPtr = core->addEntity();
+   boxEntityPtr->addComponent<Model, std::string>("../../Assets/Models/box");
+   
    //std::shared_ptr<Component> component = entity->addComponent<EngineStopper>();
-   //std::shared_ptr<TriangleRenderer> triangleRenderer = entity->addComponent<TriangleRenderer>();
-   std::shared_ptr<Model> testModel = entity->addComponent<Model>();
+   std::shared_ptr<TriangleRenderer> triangleRenderer = boxEntityPtr->addComponent<TriangleRenderer>();
+   
+   //std::shared_ptr<Model> testModel = boxEntityPtr->addComponent<Model>();
 
-   std::cout << entity->getCore() << std::endl;
+   std::cout << boxEntityPtr->getCore() << std::endl;
    //std::cout << component->getCore() << std::endl;
    //std::cout << component->getEntity() << std::endl;
 

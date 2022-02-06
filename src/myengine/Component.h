@@ -26,7 +26,7 @@ namespace myengine
 			virtual void onPlay();
 		private:
 			friend struct myengine::Entity;
-			std::weak_ptr<Entity> entity;
+			std::weak_ptr<Entity> m_Entity;
 			
 			void tick();
 			void display();

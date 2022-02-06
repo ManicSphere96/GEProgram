@@ -75,4 +75,4 @@ add_executable(game
    src/game/main.cpp
    src/game/test.cpp
 )
-#set_target_properties(game PROPERTIES COMPILE_FLAGS "-m32" LINK_FLAGS "-m32")
+set_target_properties(game PROPERTIES LINK_FLAGS /stack:64000)

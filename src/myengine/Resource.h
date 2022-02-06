@@ -8,12 +8,13 @@ namespace myengine
 	struct Resource
 	{
 		public:
-			std::string getPath() { return path; }
-
+			Resource( std::string thepath);
+			Resource();
+			void onInit(std::string thepath);
 		private:
 			
-			virtual void onInit();
-			std::string path;
+			
+			std::string m_Path;
 
 	};
 }

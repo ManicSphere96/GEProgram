@@ -1,3 +1,5 @@
+#pragma warning(disable: 26812) // emum type warning
+
 #include <GL/glew.h>
 #include <glm/glm.hpp>
 #include <SDL2/SDL.h>
@@ -20,18 +22,18 @@ namespace myengine
 
 		// It will then return the shared ptr to a weak pointer 
 		//which is assigned to core 
-		corePtr->self = corePtr;
+		corePtr->m_CoreSelf = corePtr;
 
 		// brief Creates a shared pointer which will be assinged to screen.
 		// This will allow the shared pointer to acess functions from the
 		// screen header file
-		corePtr->screen = std::make_shared<Screen>();
-		corePtr->keyboard = std::make_shared<Keyboard>();
-		corePtr->environment = std::make_shared<Environment>();
+		corePtr->m_Screen = std::make_shared<Screen>();
+		corePtr->m_Keyboard = std::make_shared<Keyboard>();
+		corePtr->m_Environment = std::make_shared<Environment>();
 		//corePtr->sound = std::make_shared<Sound>();
 
-		corePtr->screen->setWidth(800);
-		corePtr->screen->setHeight(800);
+		corePtr->m_Screen->setWidth(800);
+		corePtr->m_Screen->setHeight(800);
 
 		// This will check to see if the SDL video library has been initialized
 		// If it hasn't been initialized it will then throw an exception
@@ -41,14 +43,14 @@ namespace myengine
 		}
 
 		// Creates an SDL window and also get the width and height of the screen
-		corePtr->window = SDL_CreateWindow("My Engine",
+		corePtr->m_Window = SDL_CreateWindow("My Engine",
 			SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-			corePtr->screen->getWidth(), corePtr->screen->getHeight(), 
+			corePtr->m_Screen->getWidth(), corePtr->m_Screen->getHeight(),
 			SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL);
 
 		// Checks to see if an OpenGL context has been created for the window
 		// If it hasn't been created it will then throw an exception
-		if (!SDL_GL_CreateContext(corePtr->window))
+		if (!SDL_GL_CreateContext(corePtr->m_Window))
 		{
 			throw std::exception();
 		}
@@ -60,32 +62,32 @@ namespace myengine
 			throw std::exception();
 		}
 
-		corePtr->device = alcOpenDevice(NULL);
+		corePtr->m_Device = alcOpenDevice(NULL);
 
-		if (!corePtr->device)
+		if (!corePtr->m_Device)
 		{
 			throw std::exception("Failed to open audio device");
 		}
 
-		corePtr->context = alcCreateContext(corePtr->device, NULL);
+		corePtr->m_Context = alcCreateContext(corePtr->m_Device, NULL);
 
-		if (!corePtr->context)
+		if (!corePtr->m_Context)
 		{
-			alcCloseDevice(corePtr->device);
+			alcCloseDevice(corePtr->m_Device);
 			throw std::exception("Failed to make audio current");
 		}
 
-		if (!alcMakeContextCurrent(corePtr->context))
+		if (!alcMakeContextCurrent(corePtr->m_Context))
 		{
-			alcDestroyContext(corePtr->context);
-			alcCloseDevice(corePtr->device);
+			alcDestroyContext(corePtr->m_Context);
+			alcCloseDevice(corePtr->m_Device);
 			throw std::exception("Failed to make context current");
 		}
 
 		glClearColor(0, 0, 1, 1);
 
 		// Sets the running bool variable to true
-		corePtr->running = true;
+		corePtr->m_Running = true;
 
 		// It will then return the shared pointer
 		return corePtr;
@@ -103,12 +105,12 @@ namespace myengine
 
 		// This shared pointer is then assigned to a weak pointer
 		// and the reassigned to itself
-		entityPtr->core = self;
-		entityPtr->self = entityPtr;
-		entityPtr->transform = entityPtr->addComponent<Transform>();
+		entityPtr->m_Core = m_CoreSelf;
+		entityPtr->m_EntitySelf = entityPtr;
+		entityPtr->m_Transform = entityPtr->addComponent<Transform>();
 
 		// The shared pointer is then added to the entities vector
-		entities.push_back(entityPtr);
+		m_Entities.push_back(entityPtr);
 
 		// It will then return the shared pointer
 		return entityPtr;
@@ -119,20 +121,20 @@ namespace myengine
 	{
 		/// Returns the environment from the core
 
-		return environment;
+		return m_Environment;
 	}
 
 	std::shared_ptr<Keyboard> Core::getKeyboard()
 	{
 		/// Returns the keyboard from the core
 
-		return keyboard;
+		return m_Keyboard;
 	}
 
 
-	void Core::registerCollider(std::shared_ptr<SphereCollider> collider)
+	/*void Core::registerCollider(std::shared_ptr<SphereCollider> collider)
 	{
-		collidersVect.push_back(collider);
+		m_CollidersVect.push_back(collider);
 	}
 
 	void Core::unregisterCollider(std::shared_ptr <SphereCollider> collider)
@@ -145,7 +147,7 @@ namespace myengine
 			}
 		}
 	}
-
+	*/
 	void Core::start()
 	{
 		/**
@@ -158,7 +160,7 @@ namespace myengine
 
 		// It will first check to see if the running bool 
 		// variable is true
-		while (running)
+		while (m_Running)
 		{
 			SDL_Event incomingEvent;
 
@@ -170,15 +172,15 @@ namespace myengine
 				}
 				else if (incomingEvent.type == SDL_KEYDOWN)
 				{
-					keyboard->keys.push_back(incomingEvent.key.keysym.sym);
+					m_Keyboard->keys.push_back(incomingEvent.key.keysym.sym);
 				}
 				else if (incomingEvent.type == SDL_KEYUP)
 				{
-					keyboard->removeKey(incomingEvent.key.keysym.sym);
+					m_Keyboard->removeKey(incomingEvent.key.keysym.sym);
 				}
 			}
 
-			environment->tick();
+			
 
 			glEnable(GL_CULL_FACE);
 
@@ -186,16 +188,16 @@ namespace myengine
 
 			// It will then run a for loop checking each entity in the
 			// entities vector and then run the tick function 
-			for (size_t ei = 0; ei < entities.size(); ++ei)
+			for (size_t ei = 0; ei < m_Entities.size(); ++ei)
 			{
-				entities.at(ei)->tick();
+				m_Entities.at(ei)->tick();
 			}
 
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			
-			for (size_t ei = 0; ei < entities.size(); ++ei)
+			for (size_t ei = 0; ei < m_Entities.size(); ++ei)
 			{
-				entities.at(ei)->display();
+				m_Entities.at(ei)->display();
 			}
 
 
@@ -203,12 +205,12 @@ namespace myengine
 
 			glDisable(GL_DEPTH_TEST);
 
-			SDL_GL_SwapWindow(window);
+			SDL_GL_SwapWindow(m_Window);
 		}
 	}
 
 	void Core::stop()
 	{
-		running = false;
+		m_Running = false;
 	}
 }

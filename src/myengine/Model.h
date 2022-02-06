@@ -14,9 +14,12 @@ namespace myengine
 	struct Model : Resource , Component
 	{
 		public:
-			void onInit();
+			Model();
+			void onInit(std::string path);
+			 
 		private:
 			friend struct myengine::MeshRenderer;
 			std::shared_ptr<renderer::VertexArray> vao;
+			std::shared_ptr<Resource> modelResource;
 	};
 }

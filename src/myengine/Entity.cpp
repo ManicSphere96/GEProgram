@@ -7,14 +7,14 @@ namespace myengine
 	std::shared_ptr<Core> Entity::getCore()
 	{
 		/// Returns the core
-		return core.lock();
+		return m_Core.lock();
 	}
 
 	std::shared_ptr<Transform> Entity::getTransform()
 	{
 		/// Returns the Transform
 
-		return transform.lock();
+		return m_Transform.lock();
 	}
 
 
@@ -23,9 +23,9 @@ namespace myengine
 		// Runs a for loop to check each component which has 
 		// been added to the entity and then runs the tick function
 		//ci means components in the vector
-		for (size_t cn = 0; cn < components.size(); cn++)
+		for (size_t cn = 0; cn < m_Components.size(); cn++)
 		{
-			components.at(cn)->tick();
+			m_Components.at(cn)->tick();
 		}
 	}
 
@@ -33,17 +33,17 @@ namespace myengine
 	{
 		// Runs a for loop to check each component which has 
 		// been added to the entity and then runs the display function
-		for (size_t ci = 0; ci < components.size(); ci++)
+		for (size_t ci = 0; ci < m_Components.size(); ci++)
 		{
-			components.at(ci)->display();
+			m_Components.at(ci)->display();
 		}
 	}
 
-	void Entity::colliding(std::shared_ptr<SphereCollider> collider)
+	/*void Entity::colliding(std::shared_ptr<SphereCollider> collider)
 	{
-		for (size_t ci = 0; ci < components.size(); ci++)
+		for (size_t ci = 0; ci < m_Components.size(); ci++)
 		{
-			//components.at(ci)->/*run something when this happens*/;
+			//components.at(ci)-> run something when this happens
 		}
-	}
+	}*/
 }

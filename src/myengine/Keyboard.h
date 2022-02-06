@@ -1,5 +1,6 @@
 #pragma once
 
+#pragma warning(disable: 26812) // emum type warning
 #include <SDL2/SDL.h>
 #include <vector>
 
