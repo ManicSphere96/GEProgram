@@ -1,12 +1,16 @@
 ﻿cmake_minimum_required(VERSION 3.0)
+#set(CMAKE_GENERATOR_PLATFORM Win32)
+
 project(MYENGINE)
 
+
+find_package(OpenGL REQUIRED)
 include_directories(sdk/Include src/renderer src/myengine)
 
 link_directories(${CMAKE_SOURCE_DIR}/sdk/Lib)
 
-link_libraries(glew32 OpenGL32 SDL2 OpenAL32)
 
+link_libraries(glew32 SDL2 OpenAL32 OpenGL32)
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SAFESEH:NO")
 
 
@@ -29,7 +33,7 @@ add_library(renderer
    src/renderer/bugl2.h
    src/renderer/stb_image.h
 )
-
+#set_target_properties(renderer PROPERTIES COMPILE_FLAGS "-m32" LINK_FLAGS "-m32")
 target_link_libraries(renderer)
 
 add_library(myengine
@@ -39,7 +43,7 @@ add_library(myengine
      src/myengine/Keyboard.cpp
      src/myengine/Environment.cpp
      src/myengine/Screen.cpp
-     src/myengine/Sound.cpp
+#     src/myengine/Sound.cpp
      src/myengine/TriangleRenderer.cpp
      src/myengine/Transform.cpp
      src/myengine/Model.cpp
@@ -52,7 +56,8 @@ add_library(myengine
      src/myengine/Keyboard.h
      src/myengine/Environment.h
      src/myengine/Screen.h
-     src/myengine/Sound.h
+#     src/myengine/Sound.h
+     src/myengine/Shader.h
      src/myengine/TriangleRenderer.h
      src/myengine/Transform.h
      src/myengine/Trigger.h
@@ -60,14 +65,14 @@ add_library(myengine
      src/myengine/Mouse.h
      src/myengine/MeshRenderer.h
  	src/myengine/Resource.h
-	src/myengine/stb_vorbis.c
+#	src/myengine/stb_vorbis.c
 )
-
+#set_target_properties(myengine PROPERTIES COMPILE_FLAGS "-m32" LINK_FLAGS "-m32")
 target_link_libraries(myengine)
+link_libraries(renderer myengine glew32 OpenGL32)
 
 add_executable(game
    src/game/main.cpp
    src/game/test.cpp
 )
-
-target_link_libraries(game myengine)
+#set_target_properties(game PROPERTIES COMPILE_FLAGS "-m32" LINK_FLAGS "-m32")

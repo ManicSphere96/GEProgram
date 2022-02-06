@@ -1,6 +1,9 @@
 #include <GL/glew.h>
 #include <glm/glm.hpp>
+#include <SDL2/SDL.h>
+
 #include "Core.h"
+
 
 namespace myengine
 {
@@ -25,7 +28,7 @@ namespace myengine
 		corePtr->screen = std::make_shared<Screen>();
 		corePtr->keyboard = std::make_shared<Keyboard>();
 		corePtr->environment = std::make_shared<Environment>();
-		corePtr->sound = std::make_shared<Sound>();
+		//corePtr->sound = std::make_shared<Sound>();
 
 		corePtr->screen->setWidth(800);
 		corePtr->screen->setHeight(800);
@@ -134,7 +137,7 @@ namespace myengine
 
 	void Core::unregisterCollider(std::shared_ptr <SphereCollider> collider)
 	{
-		for (int i = 0; i < collidersVect.size(); i++)
+		for (int i = 0; i < (int)collidersVect.size(); i++)
 		{
 			if (collidersVect[i] == collider)
 			{

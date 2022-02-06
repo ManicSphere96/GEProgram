@@ -10,7 +10,7 @@ namespace myengine
 		 * true, otherwise it will return false
 		 */
 
-		for (int i = 0; i < keys.size(); i++)
+		for (int i = 0; i < (int)keys.size(); i++)
 		{
 			if (keys.at(i) == keyCode)
 			{
@@ -39,7 +39,7 @@ namespace myengine
 		 * any keys which are not being pressed
 		 */
 
-		for (int i = 0; i < keys.size(); i++)
+		for (int i = 0; i < (int)keys.size(); i++)
 		{
 			if (keys.at(i) == key)
 			{

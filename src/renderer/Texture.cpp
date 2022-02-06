@@ -1,5 +1,11 @@
 #include "Texture.h"
 
+#pragma warning(disable: 26451) // 4 byte to 8 byte cast. Check build target 32 vs 64
+#pragma warning(disable: 6011) // Deference NULL 
+#pragma warning(disable: 6308) // realloc check. 
+#pragma warning(disable: 28182) // Deference NULL. 
+
+// TODO increase stack size to alllow ofr stb_image.h as it needs 64k of stack.
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 

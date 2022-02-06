@@ -1,6 +1,8 @@
 #include "VertexArray.h"
 #include "VertexBuffer.h"
 
+#pragma warning(disable: 4101) //Unused variable for execption 'e' in bugl2.h
+#pragma warning(disable: 26451) // 4 byte to 8 byte cast. Check build target 32 vs 64
 #include "bugl2.h"
 
 namespace renderer
@@ -96,10 +98,10 @@ namespace renderer
 
 				glBindBuffer(GL_ARRAY_BUFFER, buffers.at(i)->getId());
 
-				glVertexAttribPointer(i, buffers.at(i)->getComponents(), GL_FLOAT, GL_FALSE,
+				glVertexAttribPointer((GLuint)i, buffers.at(i)->getComponents(), GL_FLOAT, GL_FALSE,
 					0, (void*)0);
 
-				glEnableVertexAttribArray(i);
+				glEnableVertexAttribArray((GLuint)i);
 				glBindBuffer(GL_ARRAY_BUFFER, 0);
 			}
 

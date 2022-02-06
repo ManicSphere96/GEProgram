@@ -133,7 +133,7 @@ namespace renderer
 
 		for (size_t i = 0; i < samplers.size(); i++)
 		{
-			glActiveTexture(GL_TEXTURE0 + i);
+			glActiveTexture((GLenum)(GL_TEXTURE0 + i));
 
 			if (samplers.at(i).texture)
 			{
@@ -145,11 +145,11 @@ namespace renderer
 			}
 		}
 
-		glDrawArrays(GL_TRIANGLES, 0, vertexArray->getVertCount());
+		glDrawArrays(GL_TRIANGLES, 0, (GLsizei)vertexArray->getVertCount());
 
 		for (size_t i = 0; i < samplers.size(); i++)
 		{
-			glActiveTexture(GL_TEXTURE0 + i);
+			glActiveTexture((GLenum)(GL_TEXTURE0 + i));
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
 

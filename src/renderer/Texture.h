@@ -14,6 +14,6 @@ namespace renderer
 			GLuint getId();
 		private:
 			GLuint id;
-			glm::vec2 size;
+			glm::vec2 size = { 0, 0 };
 	};
 }

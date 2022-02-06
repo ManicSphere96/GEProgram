@@ -1,6 +1,6 @@
 #pragma once
 #include <memory>
-#include <renderer/renderer.h>
+#include <renderer.h>
 #include "Component.h"
 
 namespace myengine

@@ -19,9 +19,9 @@ namespace renderer
 			GLuint getId();
 		private:
 			GLuint vaoId;
-			GLuint positionsVbo;
-			GLuint tcsVbo;
-			GLuint normalsVbo;
+			GLuint positionsVbo = 0;
+			GLuint tcsVbo = 0;
+			GLuint normalsVbo = 0;
 			std::vector<std::shared_ptr<VertexBuffer> > buffers;
 			size_t vertCount;
 			bool dirty;

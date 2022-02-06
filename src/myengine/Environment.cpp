@@ -6,7 +6,7 @@ namespace myengine
 	Environment::Environment()
 	{
 		dt = 0;
-		last = SDL_GetTicks();
+		last = (float)SDL_GetTicks();
 	}
 
 	float Environment::getDeltaTime()
@@ -20,7 +20,7 @@ namespace myengine
 	{
 		/// Calculates current delta time
 
-		float current = SDL_GetTicks();
+		float current = (float)SDL_GetTicks();
 		float diff = current - last;
 
 		dt = diff / 1000.0f;

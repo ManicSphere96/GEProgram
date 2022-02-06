@@ -1,4 +1,7 @@
 #pragma once
+
+#pragma warning(disable: 26812) // emum type warning 
+
 #include <memory>
 #include <vector>
 #include <SDL2/SDL.h>
@@ -16,7 +19,7 @@
 #include "Trigger.h"
 #include "Model.h"
 #include "Mouse.h"
-#include "Sound.h"
+//#include "Sound.h"
 #include "Resource.h"
 
 
@@ -42,7 +45,7 @@ namespace myengine
 		std::shared_ptr<Environment> environment;
 		std::shared_ptr<Screen> screen;
 		std::shared_ptr<Keyboard> keyboard;
-		std::shared_ptr<Sound> sound;
+		//std::shared_ptr<Sound> sound;
 		std::weak_ptr<Core> self;
 		SDL_Window* window;
 		ALCdevice* device;

@@ -1,4 +1,7 @@
 #include "Sound.h"
+#define STB_DEFINE
+#define STB_ONLY
+//#include "stb.h"           /*  http://nothings.org/stb.h  */
 #include "stb_vorbis.c"
 
 namespace myengine
