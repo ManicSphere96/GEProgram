@@ -21,6 +21,7 @@
 #include "Mouse.h"
 //#include "Sound.h"
 #include "Resource.h"
+#include "MeshRenderer.h"
 
 
 namespace myengine

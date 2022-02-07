@@ -19,7 +19,7 @@ namespace myengine
 			std::shared_ptr<Keyboard> getKeyboard();
 			std::shared_ptr<Transform> getTransform();
 			template <typename T>
-			std::shared_ptr<T> getComponent() { return getEntity()->getComponent(); }
+			std::shared_ptr<T> getComponent() { return getEntity()->getComponent<T>(); }
 			virtual void onTick();
 			virtual void onDisplay();
 			virtual void onInit();

@@ -74,6 +74,22 @@ namespace myengine
 				return componentPtr;
 			}
 
+			template <typename T>
+			std::shared_ptr<T> getComponent()
+			{
+				/// Returns the component 
+				for (size_t ci = 0; ci < m_Components.size(); ci++)
+				{
+					std::shared_ptr<T> rtn = std::dynamic_pointer_cast<T>(m_Components.at(ci));
+
+					if (rtn)
+					{
+						return rtn;
+					}
+				}
+				throw std::exception("Failed to obtain specified component");
+			}
+
 
 			std::shared_ptr<Core> getCore();
 			std::shared_ptr<Transform> getTransform();
@@ -85,6 +101,6 @@ namespace myengine
 			std::weak_ptr<Entity> m_EntitySelf;
 			void tick();
 			void display();
-			void colliding(std::shared_ptr<SphereCollider> collider);
+			//void colliding(std::shared_ptr<SphereCollider> collider);
 	};
 }
