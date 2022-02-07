@@ -74,6 +74,7 @@ link_libraries(renderer myengine glew32 OpenGL32)
 add_executable(game
    src/game/main.cpp
    src/game/test.cpp
+   src/game/test.h
 )
 set_target_properties(game PROPERTIES LINK_FLAGS /stack:64000)
 
@@ -81,3 +82,7 @@ file (COPY sdk/Lib/glew32.dll DESTINATION ${CMAKE_BINARY_DIR}/Debug)
 file (COPY sdk/Lib/OpenAL32.dll DESTINATION ${CMAKE_BINARY_DIR}/Debug)
 file (COPY sdk/Lib/SDL2.dll DESTINATION ${CMAKE_BINARY_DIR}/Debug)
 file (COPY Assets/Models/cube.obj DESTINATION ${CMAKE_BINARY_DIR}/Debug)
+file (COPY Assets/Models/cube2.obj DESTINATION ${CMAKE_BINARY_DIR}/Debug)
+file (COPY Assets/Models/curuthers/curuthers.obj DESTINATION ${CMAKE_BINARY_DIR}/Debug)
+file (COPY Assets/Shaders/fragShader.txt DESTINATION ${CMAKE_BINARY_DIR}/Debug)
+file (COPY Assets/Shaders/vertShader.txt DESTINATION ${CMAKE_BINARY_DIR}/Debug)
