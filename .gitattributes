@@ -1,0 +1,6 @@
+*.obj binary
+*.mtl binary
+*.bmp binary
+*.png binary
+*.dll binary
+*.lib binary
