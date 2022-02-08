@@ -35,7 +35,7 @@ namespace myengine
 		// been added to the entity and then runs the display function
 		for (size_t ci = 0; ci < m_Components.size(); ci++)
 		{
-			m_Components.at(ci)->display();
+			m_Components.at(ci)->onDisplay();
 		}
 	}
 

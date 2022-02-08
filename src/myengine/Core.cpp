@@ -182,7 +182,7 @@ namespace myengine
 				}
 				else if (incomingEvent.type == SDL_KEYDOWN)
 				{
-					m_Keyboard->keys.push_back(incomingEvent.key.keysym.sym);
+					m_Keyboard->keys.push_back(incomingEvent.key.keysym.sym); 
 				}
 				else if (incomingEvent.type == SDL_KEYUP)
 				{

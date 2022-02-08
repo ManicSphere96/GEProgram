@@ -50,7 +50,10 @@ add_library(myengine
     src/myengine/Mouse.cpp
     src/myengine/MeshRenderer.cpp
 	src/myengine/Resource.cpp
-	src/myengine/Mesh.h
+	src/myengine/Mesh.cpp
+	src/myengine/TextureResource.cpp
+	src/myengine/Shader.cpp
+	src/myengine/Player.cpp
     src/myengine/Core.h
     src/myengine/Entity.h
     src/myengine/Component.h
@@ -67,6 +70,9 @@ add_library(myengine
     src/myengine/MeshRenderer.h
  	src/myengine/Resource.h
 	src/myengine/Mesh.h
+	src/myengine/TextureResource.h
+	src/myengine/Shader.h
+	src/myengine/Player.h
 #	src/myengine/stb_vorbis.c
 )
 #set_target_properties(myengine PROPERTIES COMPILE_FLAGS "-m32" LINK_FLAGS "-m32")
@@ -77,14 +83,12 @@ add_executable(game
    src/game/main.cpp
    src/game/test.cpp
    src/game/test.h
+ 
 )
 set_target_properties(game PROPERTIES LINK_FLAGS /stack:64000)
 
 file (COPY sdk/Lib/glew32.dll DESTINATION ${CMAKE_BINARY_DIR}/Debug)
 file (COPY sdk/Lib/OpenAL32.dll DESTINATION ${CMAKE_BINARY_DIR}/Debug)
 file (COPY sdk/Lib/SDL2.dll DESTINATION ${CMAKE_BINARY_DIR}/Debug)
-file (COPY Assets/Models/cube.obj DESTINATION ${CMAKE_BINARY_DIR}/Debug)
-file (COPY Assets/Models/cube2.obj DESTINATION ${CMAKE_BINARY_DIR}/Debug)
-file (COPY Assets/Models/curuthers/curuthers.obj DESTINATION ${CMAKE_BINARY_DIR}/Debug)
-file (COPY Assets/Shaders/fragShader.txt DESTINATION ${CMAKE_BINARY_DIR}/Debug)
-file (COPY Assets/Shaders/vertShader.txt DESTINATION ${CMAKE_BINARY_DIR}/Debug)
+file (COPY Assets DESTINATION ${CMAKE_BINARY_DIR}/Debug)
+

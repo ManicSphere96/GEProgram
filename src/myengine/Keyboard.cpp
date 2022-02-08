@@ -1,5 +1,5 @@
 #include "Keyboard.h"
-
+#include <iostream>
 namespace myengine
 {
 	bool Keyboard::isKeyDown(int keyCode)
@@ -14,7 +14,9 @@ namespace myengine
 		{
 			if (keys.at(i) == keyCode)
 			{
+				std::cout << keyCode;
 				return true;
+
 			}
 		}
 

@@ -1,6 +1,6 @@
 #include <iostream>
 #include <core.h>
-#include "test.h"
+#include "Player.h"
 
 
 using namespace myengine;
@@ -31,15 +31,27 @@ int main()
 
 
    std::shared_ptr<Entity> entity = core->addEntity();
-   std::shared_ptr<MeshRenderer> mr = entity->addComponent<MeshRenderer>();
-
-   mr->setMesh(core->getResources()->load<Mesh>("Debug\\curuthers"));
-   mr->setShader(core->getResources()->load<Shader>("Debug\\vertShader", "Debug\\fragShader"));
-   mr->setTexture(core->getResources()->load<TextureResource>("Debug\\Whiskers_diffuse"));
+   
+   std::shared_ptr<Player> player = entity->addComponent<Player>();
+   player->Initialization(glm::vec3(0, 0, -10), 
+	   glm::vec3(0.5f, 0.5f, 0.5f), 
+	   glm::vec3(0, 0.0f, 0), 
+	   "Debug\\Assets\\models\\curuthers\\curuthers",
+	   "Debug\\Assets\\Shaders\\vertShader", 
+	   "Debug\\Assets\\Shaders\\fragShader", 
+	   "Debug\\Assets\\Textures\\Whiskers_diffuse", 
+	   true);
+   player->SetMoveAmount(0.1f);
+	
+   
+   //std::shared_ptr<MeshRenderer> mr = entity->addComponent<MeshRenderer>();
+  /* mr->setMesh(core->getResources()->load<Mesh>("Debug\\Assets\\models\\curuthers\\curuthers"));
+   mr->setShader(core->getResources()->load<Shader>("Debug\\Assets\\Shaders\\vertShader", "Debug\\Assets\\Shaders\\fragShader"));
+   mr->setTexture(core->getResources()->load<TextureResource>("Debug\\Assets\\Textures\\Whiskers_diffuse"));
    mr->getTransform()->setPosition(glm::vec3(0, 0, -10));
    mr->getTransform()->setScale(glm::vec3(0.5f, 0.5f, 0.5f));
-   mr->getTransform()->rotate(glm::vec3(0, 0.0f, 0));
-   mr->onDisplay();
+   mr->getTransform()->rotate(glm::vec3(0, 0.0f, 0));*/
+   
 	
   /* 
    mr->setShader(core->getResources()->load<Shader>("shaders/basic");*/

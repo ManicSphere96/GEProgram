@@ -10,8 +10,8 @@ varying vec3 v_Normal;
 void main()
 {
 	vec3 lightPos = vec3(10, 10, 0);
-	float ambientStrength = 0.1;
-	vec3 lightColor = vec3(0,0,1);
+	float ambientStrength = 1;
+	vec3 lightColor = vec3(1,1,1);
 
 	vec3 ambient = ambientStrength * lightColor;
 	vec3 norm = normalize(v_Normal);
