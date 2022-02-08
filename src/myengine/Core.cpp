@@ -30,6 +30,12 @@ namespace myengine
 		corePtr->m_Screen = std::make_shared<Screen>();
 		corePtr->m_Keyboard = std::make_shared<Keyboard>();
 		corePtr->m_Environment = std::make_shared<Environment>();
+		std::shared_ptr<Resources> resourcesPtr = std::make_shared<Resources>();
+		
+		corePtr->m_Resources = resourcesPtr;
+		resourcesPtr->setSelf(resourcesPtr);
+			//std::make_shared<Resources>();
+		
 		//corePtr->sound = std::make_shared<Sound>();
 
 		corePtr->m_Screen->setWidth(800);
@@ -148,6 +154,10 @@ namespace myengine
 		}
 	}
 	*/
+	
+		
+	
+
 	void Core::start()
 	{
 		/**

@@ -5,16 +5,12 @@
 namespace myengine
 {
 	
-	struct Resource
+	struct Resource 
 	{
 		public:
-			Resource( std::string thepath);
-			Resource();
-			void onInit(std::string thepath);
-		private:
-			
-			
 			std::string m_Path;
-
+			std::string m_VertPath;
+			std::string m_FragPath;
+			virtual void onInit();
 	};
 }

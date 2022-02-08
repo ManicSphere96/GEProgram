@@ -2,9 +2,11 @@
 
 namespace myengine
 {
+	Shader::Shader()
+	{}
+
 	void Shader::onInit()
 	{
-		shaderProgram = std::make_shared<renderer::ShaderProgram>(getPath() + ".vert",
-			getPath() + ".frag");
+		m_ShaderProgram = std::make_shared<renderer::ShaderProgram>(m_VertPath + ".txt",m_FragPath + ".txt");
 	}
 }

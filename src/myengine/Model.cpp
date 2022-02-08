@@ -6,9 +6,8 @@ namespace myengine
 	{
 
 	}
-	void Model::onInit(const std::string path)
+	void Model::onInit(std::string path)
 	{
-		Resource::onInit(path);
-		vao = std::make_shared <renderer::VertexArray>(path + ".obj");
+		m_Path = path ;
 	}
 }

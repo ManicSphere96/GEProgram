@@ -21,7 +21,11 @@
 #include "Mouse.h"
 //#include "Sound.h"
 #include "Resource.h"
+#include "Resources.h"
 #include "MeshRenderer.h"
+#include "Mesh.h"
+#include "Shader.h"
+#include "TextureResource.h"
 
 
 namespace myengine
@@ -34,6 +38,7 @@ namespace myengine
 		std::shared_ptr<Entity> addEntity();
 		std::shared_ptr<Environment> getEnvironment();
 		std::shared_ptr<Keyboard> getKeyboard();
+		std::shared_ptr<Resources> getResources() { return m_Resources; }
 		//void registerCollider(std::shared_ptr<SphereCollider> collider);
 		//void unregisterCollider(std::shared_ptr <SphereCollider> collider);
 		void start();
@@ -42,7 +47,7 @@ namespace myengine
 		bool m_Running;
 		std::vector<std::shared_ptr<Entity> > m_Entities;
 		std::vector<std::shared_ptr<SphereCollider> > m_CollidersVect;
-		std::vector<std::shared_ptr<Resource> > m_Recources;
+		std::shared_ptr<Resources> m_Resources;
 		std::shared_ptr<Environment> m_Environment;
 		std::shared_ptr<Screen> m_Screen;
 		std::shared_ptr<Keyboard> m_Keyboard;

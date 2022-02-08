@@ -7,6 +7,7 @@
 
 namespace renderer
 {
+	
 	ShaderProgram::ShaderProgram(std::string vert, std::string frag)
 	{
 		/**
