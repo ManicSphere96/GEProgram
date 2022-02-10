@@ -54,6 +54,7 @@ add_library(myengine
 	src/myengine/TextureResource.cpp
 	src/myengine/Shader.cpp
 	src/myengine/Player.cpp
+	src/myengine/SphereCollider.cpp
     src/myengine/Core.h
     src/myengine/Entity.h
     src/myengine/Component.h
@@ -73,6 +74,7 @@ add_library(myengine
 	src/myengine/TextureResource.h
 	src/myengine/Shader.h
 	src/myengine/Player.h
+	src/myengine/SphereCollider.h
 #	src/myengine/stb_vorbis.c
 )
 #set_target_properties(myengine PROPERTIES COMPILE_FLAGS "-m32" LINK_FLAGS "-m32")

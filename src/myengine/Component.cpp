@@ -92,4 +92,8 @@ namespace myengine
 		* to display a model/triangle
 		*/
 	}
+	Component::~Component()
+	{
+
+	}
 }

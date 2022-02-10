@@ -1,6 +1,6 @@
 #include <iostream>
+#include <fstream>
 #include <core.h>
-#include "Player.h"
 
 
 using namespace myengine;
@@ -28,47 +28,44 @@ int main()
    //std::shared_ptr<Entity> entity = core->addEntity();
    
    
+   std::ifstream levelFile;
+   levelFile.open("Debug\\Assets\\LevelFiles\\Level1.txt");
+
+   float x, y, z, scale, rotationX, rotationY, rotationZ, frictionConstant, colliderSize;
+   std::string model, vert, frag, texture;
+   bool isPlayer, isGravity, isMoveable;
 
 
-   std::shared_ptr<Entity> entity = core->addEntity();
-   
-   std::shared_ptr<Player> player = entity->addComponent<Player>();
-   player->Initialization(glm::vec3(0, 0, -10), 
-	   glm::vec3(0.5f, 0.5f, 0.5f), 
-	   glm::vec3(0, 0.0f, 0), 
-	   "Debug\\Assets\\models\\curuthers\\curuthers",
-	   "Debug\\Assets\\Shaders\\vertShader", 
-	   "Debug\\Assets\\Shaders\\fragShader", 
-	   "Debug\\Assets\\Textures\\Whiskers_diffuse", 
-	   true);
-   player->SetMoveAmount(0.1f);
-	
-   
-   //std::shared_ptr<MeshRenderer> mr = entity->addComponent<MeshRenderer>();
-  /* mr->setMesh(core->getResources()->load<Mesh>("Debug\\Assets\\models\\curuthers\\curuthers"));
-   mr->setShader(core->getResources()->load<Shader>("Debug\\Assets\\Shaders\\vertShader", "Debug\\Assets\\Shaders\\fragShader"));
-   mr->setTexture(core->getResources()->load<TextureResource>("Debug\\Assets\\Textures\\Whiskers_diffuse"));
-   mr->getTransform()->setPosition(glm::vec3(0, 0, -10));
-   mr->getTransform()->setScale(glm::vec3(0.5f, 0.5f, 0.5f));
-   mr->getTransform()->rotate(glm::vec3(0, 0.0f, 0));*/
-   
-	
-  /* 
-   mr->setShader(core->getResources()->load<Shader>("shaders/basic");*/
-   
-   
-   
-   
 
-   //std::shared_ptr<Component> component = entity->addComponent<EngineStopper>();
-  // std::shared_ptr<TriangleRenderer> triangleRenderer = boxEntityPtr->addComponent<TriangleRenderer>();
-   
-   //std::shared_ptr<Model> testModel = boxEntityPtr->addComponent<Model>();
 
-   //std::cout << boxEntityPtr->getCore() << std::endl;
-   //std::cout << component->getCore() << std::endl;
-   //std::cout << component->getEntity() << std::endl;
-
+   int entityNumber;
+   levelFile >> entityNumber;
+   for (int ei = 0; ei < entityNumber; ei++)
+   {
+	   levelFile >> x >> y >> z >> scale >> rotationX >> rotationY >> rotationZ >> frictionConstant >> colliderSize >> model >> vert >> frag >> texture >> isPlayer >> isGravity >> isMoveable;
+	   std::shared_ptr<Entity> entity = core->addEntity();
+	   std::shared_ptr<MeshRenderer> mr = entity->addComponent<MeshRenderer>();
+	   entity->getTransform()->setPosition(glm::vec3(x, y, z));
+	   entity->getTransform()->setScale(glm::vec3(scale, scale, scale));
+	   entity->getTransform()->rotate(glm::vec3(rotationX, rotationY, rotationZ));
+	   entity->getTransform()->SetIsPlayer(isPlayer);
+	   entity->getTransform()->setFriction(frictionConstant);
+	   mr->setMesh(core->getResources()->load<Mesh>(model));
+	   mr->setShader(core->getResources()->load<Shader>(vert, frag));
+	   mr->setTexture(core->getResources()->load<TextureResource>(texture));
+	   if (!isGravity)
+	   {
+		   entity->getTransform()->gravityToggle();
+	   }
+	   if (!isMoveable)
+	   {
+		   entity->getTransform()->movableToggle();
+	   }
+	   if (colliderSize != 0.0)
+	   {
+		   std::shared_ptr<SphereCollider> col1 = entity->addComponent<SphereCollider>(colliderSize);
+	   }
+   }
    core->start();
 
    return 0;

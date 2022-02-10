@@ -46,4 +46,13 @@ namespace myengine
 			//components.at(ci)-> run something when this happens
 		}
 	}*/
+
+	Entity::~Entity()
+	{
+		/*for (size_t ci = 0; ci < m_Components.size(); ci++)
+		{
+			m_Components.at(ci)->~Component();
+		}*/
+
+	}
 }

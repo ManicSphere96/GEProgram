@@ -11,7 +11,7 @@
 #include "Entity.h"
 #include "Component.h"
 #include "Screen.h"
-//#include <myengine/SphereCollider.h>
+#include <SphereCollider.h>
 #include "Environment.h"
 #include "Keyboard.h"
 #include "Transform.h"
@@ -35,14 +35,16 @@ namespace myengine
 	{
 	public:
 		static std::shared_ptr<Core> initialize();
+		void FlushCore();
 		std::shared_ptr<Entity> addEntity();
 		std::shared_ptr<Environment> getEnvironment();
 		std::shared_ptr<Keyboard> getKeyboard();
 		std::shared_ptr<Resources> getResources() { return m_Resources; }
-		//void registerCollider(std::shared_ptr<SphereCollider> collider);
-		//void unregisterCollider(std::shared_ptr <SphereCollider> collider);
+		void registerCollider(std::shared_ptr<SphereCollider> collider);
+		void unregisterCollider(std::shared_ptr <SphereCollider> collider);
 		void start();
 		void stop();
+		void RemoveEntity(std::shared_ptr<Entity> delteentity);
 	private:
 		bool m_Running;
 		std::vector<std::shared_ptr<Entity> > m_Entities;

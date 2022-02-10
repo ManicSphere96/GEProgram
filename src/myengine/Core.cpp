@@ -138,28 +138,29 @@ namespace myengine
 	}
 
 
-	/*void Core::registerCollider(std::shared_ptr<SphereCollider> collider)
+	void Core::registerCollider(std::shared_ptr<SphereCollider> collider)
 	{
 		m_CollidersVect.push_back(collider);
 	}
 
 	void Core::unregisterCollider(std::shared_ptr <SphereCollider> collider)
 	{
-		for (int i = 0; i < (int)collidersVect.size(); i++)
+		for (int i = 0; i < (int)m_CollidersVect.size(); i++)
 		{
-			if (collidersVect[i] == collider)
+			if (m_CollidersVect[i] == collider) 
 			{
-				collidersVect.erase(collidersVect.begin() + i);
+				m_CollidersVect.erase(m_CollidersVect.begin() + i);
 			}
 		}
 	}
-	*/
+	
 	
 		
 	
 
 	void Core::start()
 	{
+
 		/**
 		 * \brief Runs the main game loop.
 		 * From there it will then run tick and display functions
@@ -170,6 +171,7 @@ namespace myengine
 
 		// It will first check to see if the running bool 
 		// variable is true
+		m_Running = true;
 		while (m_Running)
 		{
 			SDL_Event incomingEvent;
@@ -198,16 +200,31 @@ namespace myengine
 
 			// It will then run a for loop checking each entity in the
 			// entities vector and then run the tick function 
+			for (size_t i = 0; i < m_CollidersVect.size(); i++)
+			{
+				for (size_t j = i+1; j < m_CollidersVect.size(); j++)
+				{
+					if (m_CollidersVect[j]->isColliding(m_CollidersVect[i]))
+					{
+						m_CollidersVect[j]->currentlyColliding( m_CollidersVect[i]);
+					}
+
+				}
+			}
 			for (size_t ei = 0; ei < m_Entities.size(); ++ei)
 			{
 				m_Entities.at(ei)->tick();
 			}
-
+			m_Environment->tick();
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			
 			for (size_t ei = 0; ei < m_Entities.size(); ++ei)
 			{
 				m_Entities.at(ei)->display();
+				if ((m_Entities.at(ei)->getTransform()->getPosition().x > 50) || (m_Entities.at(ei)->getTransform()->getPosition().x < -50))
+				{
+					stop();
+				}
 			}
 
 
@@ -216,11 +233,32 @@ namespace myengine
 			glDisable(GL_DEPTH_TEST);
 
 			SDL_GL_SwapWindow(m_Window);
+
+			
 		}
 	}
 
 	void Core::stop()
 	{
 		m_Running = false;
+	}
+	void Core::FlushCore()
+	{
+		for (size_t ei = 0; ei < m_Entities.size(); ++ei)
+		{
+			m_Entities.at(ei)->~Entity();
+		}
+
+	}
+	void Core::RemoveEntity(std::shared_ptr<Entity> deleteentity)
+	{
+		for (size_t ei = 0; ei < m_Entities.size(); ++ei)
+		{
+			if (m_Entities.at(ei) == deleteentity)
+			{
+				m_Entities.erase(m_Entities.begin() +ei);
+			}
+		}
+
 	}
 }

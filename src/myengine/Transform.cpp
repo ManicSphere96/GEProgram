@@ -7,6 +7,11 @@ namespace myengine
 		m_position = glm::vec3(0, 0, 0);
 		m_rotation = glm::vec3(0, 0, 0);
 		m_scale = glm::vec3(1, 1, 1);
+		m_Acceleration = glm::vec3(0, 0, 0);
+		m_Velocity = glm::vec3(0, 0, 0);
+		m_CanMove = true;
+		m_Gravity = true;
+
 	}
 
 	glm::mat4 Transform::getModel()
@@ -18,6 +23,7 @@ namespace myengine
 		model = glm::rotate(model, glm::radians(m_rotation.y), glm::vec3(0, 1, 0));
 		model = glm::rotate(model, glm::radians(m_rotation.x), glm::vec3(1, 0, 0));
 		model = glm::rotate(model, glm::radians(m_rotation.z), glm::vec3(0, 0, 1));
+		
 
 		return model;
 	}
@@ -27,6 +33,24 @@ namespace myengine
 		/// Sets the position for the model/triangle
 
 		m_position = pos;
+	}
+
+	void Transform::setAcceleration(glm::vec3 acceleration)
+	{
+		if (m_CanMove)
+		{
+			m_Acceleration += acceleration;
+		}
+		else
+		{
+			m_Acceleration = glm::vec3(0, 0, 0);
+		}
+		 
+	}
+
+	void Transform::setFriction(float friction)
+	{
+		m_Friction = friction;
 	}
 
 	void Transform::move(float amount)
@@ -53,6 +77,7 @@ namespace myengine
 		m_position += fwd;
 	}
 
+
 	void Transform::rotate(float angle)
 	{
 		/// Sets the rotation for the model/triangle using a float value
@@ -70,4 +95,90 @@ namespace myengine
 	{
 		scale = m_scale;
 	}
+
+	void Transform::onTick()
+	{
+		if (m_IsPlayer)
+		{
+			for (int i = 0; i < (int)getKeyboard()->keys.size(); i++)
+			{
+				// If the player presses space it will set yMomentum to 1.25
+				if ((getKeyboard()->keys[i] == SDLK_UP))
+				{
+					getTransform()->setAcceleration(glm::vec3(0, m_MoveAmount, 0));
+				}
+				else if ((getKeyboard()->keys[i] == SDLK_DOWN))
+				{
+					getTransform()->setAcceleration(glm::vec3(0, -m_MoveAmount, 0));
+				}
+				// This will then make the player jump
+				else if ((getKeyboard()->keys[i] == SDLK_LEFT))
+				{
+					getTransform()->setAcceleration(glm::vec3(-m_MoveAmount, 0, 0));
+				}
+				else if ((getKeyboard()->keys[i] == SDLK_RIGHT))
+				{
+					getTransform()->setAcceleration(glm::vec3(m_MoveAmount, 0, 0));
+				}
+				else if ((getKeyboard()->keys[i] == SDLK_s))
+				{
+					getTransform()->setAcceleration(glm::vec3(0, 0, -m_MoveAmount));
+				}
+				else if ((getKeyboard()->keys[i] == SDLK_w))
+				{
+					getTransform()->setAcceleration(glm::vec3(0, 0, m_MoveAmount));
+				}
+			}
+		}
+		if (m_CanMove)
+		{
+			m_Acceleration = m_Acceleration + (-m_Velocity * m_Friction);
+
+			if (getCore()->getEnvironment()->getDeltaTime() == 0)
+			{
+				m_position = m_position + m_Velocity;
+			}
+			else
+			{
+				m_Velocity = m_Velocity + (m_Acceleration / getCore()->getEnvironment()->getDeltaTime());
+				if (m_Gravity)
+				{
+					m_Velocity = m_Velocity + (m_GravityConst / getCore()->getEnvironment()->getDeltaTime());
+				}
+				m_position = m_position + m_Velocity;
+			}
+		}
+		m_Acceleration = glm::vec3(0, 0, 0);
+	}
+	void Transform::setVelocity(glm::vec3 vel)
+	{
+		if (m_CanMove) 
+		{
+			m_Velocity = vel;
+		}
+		else
+		{
+			m_Velocity = glm::vec3(0, 0, 0);
+		}
+		
+	}
+	void Transform::gravityToggle()
+	{
+		if (m_Gravity)
+		{
+			m_Gravity = false;
+		}
+		else
+			m_Gravity = true;
+	}
+	void Transform::movableToggle()
+	{
+		if (m_CanMove)
+		{
+			m_CanMove = false;
+		}
+		else
+			m_CanMove = true;
+	}
+	
 }
