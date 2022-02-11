@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <core.h>
+#include "GameComponent.h"
 
 
 using namespace myengine;
@@ -32,7 +33,7 @@ int main()
    levelFile.open("Debug\\Assets\\LevelFiles\\Level1.txt");
 
    float x, y, z, scale, rotationX, rotationY, rotationZ, frictionConstant, colliderSize;
-   std::string model, vert, frag, texture;
+   std::string entityName, model, vert, frag, texture;
    bool isPlayer, isGravity, isMoveable, isVisible;
 
 
@@ -42,9 +43,10 @@ int main()
    levelFile >> entityNumber;
    for (int ei = 0; ei < entityNumber; ei++)
    {
-	   levelFile >> x >> y >> z >> scale >> rotationX >> rotationY >> rotationZ >> frictionConstant >> colliderSize >> model >> vert >> frag >> texture >> isPlayer >> isGravity >> isMoveable >> isVisible;
+	   levelFile >>entityName>> x >> y >> z >> scale >> rotationX >> rotationY >> rotationZ >> frictionConstant >> colliderSize >> model >> vert >> frag >> texture >> isPlayer >> isGravity >> isMoveable >> isVisible;
 	   std::shared_ptr<Entity> entity = core->addEntity();
 	   std::shared_ptr<MeshRenderer> mr = entity->addComponent<MeshRenderer>();
+	   std::shared_ptr<GameComponent> gc = entity->addComponent<GameComponent>();
 	   entity->getTransform()->setPosition(glm::vec3(x, y, z));
 	   entity->getTransform()->setScale(glm::vec3(scale, scale, scale));
 	   entity->getTransform()->rotate(glm::vec3(rotationX, rotationY, rotationZ));
@@ -53,6 +55,7 @@ int main()
 	   mr->setMesh(core->getResources()->load<Mesh>(model));
 	   mr->setShader(core->getResources()->load<Shader>(vert, frag));
 	   mr->setTexture(core->getResources()->load<TextureResource>(texture));
+	   entity->setName(entityName);
 	   if (!isVisible)
 	   {
 		   mr->VisibleToggle();

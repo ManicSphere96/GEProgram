@@ -1,7 +1,7 @@
 #pragma once
 #include <memory>
 #include <vector>
-
+#include <string>
 namespace myengine
 {
 	struct Component;
@@ -93,6 +93,9 @@ namespace myengine
 
 			std::shared_ptr<Core> getCore();
 			std::shared_ptr<Transform> getTransform();
+			void setName(std::string name) { m_MyName = name; }
+			std::string getName() {return m_MyName; }
+			void toggleDeletion();
 			~Entity();
 		private:
 			friend struct myengine::Core;
@@ -100,8 +103,10 @@ namespace myengine
 			std::weak_ptr<Core> m_Core;
 			std::weak_ptr<Transform> m_Transform;
 			std::weak_ptr<Entity> m_EntitySelf;
+			std::string m_MyName;
 			void tick();
 			void display();
+			bool m_DestroyMe = false;
 			//void colliding(std::shared_ptr<SphereCollider> collider);
 	};
 }

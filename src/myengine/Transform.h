@@ -18,6 +18,7 @@ namespace myengine
 			glm::vec3 getPosition() { return m_position; }
 			glm::vec3 getVelocity() { return m_Velocity; }
 			glm::vec3 getRotation() { return m_rotation; }
+			bool getIsPlayer() { return m_IsPlayer; }
 			bool getMovable() { return m_CanMove; }
 			void move(float amount);
 			void move(glm::vec3 amount);
@@ -40,7 +41,7 @@ namespace myengine
 			bool m_CanMove;
 			bool m_Gravity;
 			glm::vec3 m_GravityConst = glm::vec3 (0.0f,0.0001f,0.0f);
-			glm::vec3 m_RotationConst = glm::vec3(0.0f, 2.0f, 0.0f);
+			glm::vec3 m_RotationConst = glm::vec3(1.0f, 2.0f, .0f);
 			float m_MoveAmount = 0.001f;
 			bool m_IsPlayer = false;
 	};

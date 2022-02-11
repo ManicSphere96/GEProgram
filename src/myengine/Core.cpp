@@ -144,13 +144,16 @@ namespace myengine
 		m_CollidersVect.push_back(collider);
 	}
 
-	void Core::unregisterCollider(std::shared_ptr <SphereCollider> collider)
+	void Core::unregisterCollider(SphereCollider* collider)
 	{
+		
 		for (int i = 0; i < (int)m_CollidersVect.size(); i++)
 		{
-			if (m_CollidersVect[i] == collider) 
+			//std::shared_ptr<SphereCollider> spcolider = collider;
+			if (m_CollidersVect[i].get() == collider)
 			{
 				m_CollidersVect.erase(m_CollidersVect.begin() + i);
+				i--;
 			}
 		}
 	}
@@ -221,19 +224,22 @@ namespace myengine
 			
 			for (size_t ei = 0; ei < m_Entities.size(); ++ei)
 			{
+				if (m_Entities.at(ei)->m_DestroyMe == true)
+				{
+					RemoveEntity(m_Entities.at(ei));
+
+					ei--;
+				}
+
+			}
+
+			for (size_t ei = 0; ei < m_Entities.size(); ++ei)
+			{
 				
 				if ((m_Entities.at(ei)->getTransform()->getPosition().x > 50) || (m_Entities.at(ei)->getTransform()->getPosition().x < -50))
 				{
-					for (size_t i = 0; i < m_Entities.size(); ++i)
-					{
-						if (!m_Entities.at(i)->getComponent<MeshRenderer>()->getVisible())
-						{
-							m_Entities.at(i)->getComponent<MeshRenderer>()->VisibleToggle();
-						}
-							
-					}
-
-				
+					getEntityByName("endscreen");
+					stop();
 				}
 				m_Entities.at(ei)->display();
 			}
@@ -247,7 +253,7 @@ namespace myengine
 
 			
 		}
-		std::this_thread::sleep_for(std::chrono::nanoseconds(1000000000));
+		//std::this_thread::sleep_for(std::chrono::nanoseconds(1000000000));
 	}
 
 	void Core::stop()
@@ -268,9 +274,23 @@ namespace myengine
 		{
 			if (m_Entities.at(ei) == deleteentity)
 			{
+				
+				
 				m_Entities.erase(m_Entities.begin() +ei);
+				ei--;
 			}
 		}
 
+	}
+	std::shared_ptr<Entity> Core::getEntityByName(std::string name)
+	{
+		for (size_t i = 0; i < m_Entities.size(); ++i)
+		{
+			if (m_Entities.at(i)->getName() == name)
+			{
+				return m_Entities.at(i);
+			}
+		}
+		throw std::exception("Failed to find entity with this name");
 	}
 }

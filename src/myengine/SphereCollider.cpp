@@ -13,7 +13,7 @@ namespace myengine
 
 	void SphereCollider::onDestroy()
 	{
-		getCore()->unregisterCollider(std::shared_ptr<SphereCollider>(this));
+		getCore()->unregisterCollider(this);
 	}
 
 	bool SphereCollider::isColliding(std::shared_ptr<SphereCollider> collider)
@@ -21,7 +21,8 @@ namespace myengine
 		float distancebetween = glm::distance(collider->getTransform()->getPosition(),getTransform()->getPosition());
 		if (distancebetween <= (m_Radius + collider->m_Radius))
 		{
-
+			this->m_HitCount++;
+			collider->m_HitCount++;
 			return true;
 
 		}
@@ -59,6 +60,10 @@ namespace myengine
 			collidingObj->getTransform()->setVelocity(collidingObj->getTransform()->getVelocity() - (2.0f * (glm::dot(collidingObj->getTransform()->getVelocity(), incedenceVector) * incedenceVector)));
 		}
 
+
+	}
+	SphereCollider::~SphereCollider()
+	{
 
 	}
 }

@@ -40,11 +40,13 @@ namespace myengine
 		std::shared_ptr<Environment> getEnvironment();
 		std::shared_ptr<Keyboard> getKeyboard();
 		std::shared_ptr<Resources> getResources() { return m_Resources; }
+		std::vector<std::shared_ptr<Entity> >getEntities() { return m_Entities; }
 		void registerCollider(std::shared_ptr<SphereCollider> collider);
-		void unregisterCollider(std::shared_ptr <SphereCollider> collider);
+		void unregisterCollider(SphereCollider* collider);
 		void start();
 		void stop();
 		void RemoveEntity(std::shared_ptr<Entity> delteentity);
+		std::shared_ptr<Entity> getEntityByName(std::string name);
 	private:
 		bool m_Running;
 		std::vector<std::shared_ptr<Entity> > m_Entities;

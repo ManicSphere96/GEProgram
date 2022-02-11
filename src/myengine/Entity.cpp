@@ -55,4 +55,11 @@ namespace myengine
 		}*/
 
 	}
+	void Entity::toggleDeletion()
+	{
+		if (!m_DestroyMe)
+		{
+			m_DestroyMe = true;
+		}
+	}
 }
