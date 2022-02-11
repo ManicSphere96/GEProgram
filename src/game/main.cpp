@@ -33,7 +33,7 @@ int main()
 
    float x, y, z, scale, rotationX, rotationY, rotationZ, frictionConstant, colliderSize;
    std::string model, vert, frag, texture;
-   bool isPlayer, isGravity, isMoveable;
+   bool isPlayer, isGravity, isMoveable, isVisible;
 
 
 
@@ -42,7 +42,7 @@ int main()
    levelFile >> entityNumber;
    for (int ei = 0; ei < entityNumber; ei++)
    {
-	   levelFile >> x >> y >> z >> scale >> rotationX >> rotationY >> rotationZ >> frictionConstant >> colliderSize >> model >> vert >> frag >> texture >> isPlayer >> isGravity >> isMoveable;
+	   levelFile >> x >> y >> z >> scale >> rotationX >> rotationY >> rotationZ >> frictionConstant >> colliderSize >> model >> vert >> frag >> texture >> isPlayer >> isGravity >> isMoveable >> isVisible;
 	   std::shared_ptr<Entity> entity = core->addEntity();
 	   std::shared_ptr<MeshRenderer> mr = entity->addComponent<MeshRenderer>();
 	   entity->getTransform()->setPosition(glm::vec3(x, y, z));
@@ -53,6 +53,10 @@ int main()
 	   mr->setMesh(core->getResources()->load<Mesh>(model));
 	   mr->setShader(core->getResources()->load<Shader>(vert, frag));
 	   mr->setTexture(core->getResources()->load<TextureResource>(texture));
+	   if (!isVisible)
+	   {
+		   mr->VisibleToggle();
+	   }
 	   if (!isGravity)
 	   {
 		   entity->getTransform()->gravityToggle();

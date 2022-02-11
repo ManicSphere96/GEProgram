@@ -146,6 +146,7 @@ namespace myengine
 					m_Velocity = m_Velocity + (m_GravityConst / getCore()->getEnvironment()->getDeltaTime());
 				}
 				m_position = m_position + m_Velocity;
+				m_rotation = m_rotation + m_RotationConst;
 			}
 		}
 		m_Acceleration = glm::vec3(0, 0, 0);

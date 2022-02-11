@@ -1,46 +1,7 @@
-2
-0 0 -100 1.25 0 0 0 0.0000 3.1 Debug\\Assets\\models\\ball Debug\\Assets\\Shaders\\vertShader Debug\\Assets\\Shaders\\fragShader  Debug\\Assets\\Textures\\Whiskers_diffuse 1 1 1
-0 10 -100 1.25 0 0 0 0.0000 3.1 Debug\\Assets\\models\\ball Debug\\Assets\\Shaders\\vertShader Debug\\Assets\\Shaders\\fragShader  Debug\\Assets\\Textures\\material 0 0 0
 
+3
+0 0 -80 1.25 0 -90 0 0.0000 3.1 Debug\\Assets\\models\\curuthers\\curuthers Debug\\Assets\\Shaders\\vertShader Debug\\Assets\\Shaders\\fragShader  Debug\\Assets\\Textures\\Whiskers_diffuse 1 0 1 1
+0 -10 -100 1.25 0 0 0 0.0000 3.1 Debug\\Assets\\models\\ball Debug\\Assets\\Shaders\\vertShader Debug\\Assets\\Shaders\\fragShader  Debug\\Assets\\Textures\\Ball1 0 0 0 1
+0 -3.1 -5 1.25 0 0 0 0.0000 3.1 Debug\\Assets\\models\\ball Debug\\Assets\\Shaders\\vertShader Debug\\Assets\\Shaders\\fragShader  Debug\\Assets\\Textures\\Win 0 0 0 0
 
-   std::shared_ptr<Entity> secondBall = core->addEntity();
-
-   std::shared_ptr<SphereCollider> col2 = secondBall->addComponent<SphereCollider>(3.1f);
-   std::shared_ptr<MeshRenderer> mr2 = secondBall->addComponent<MeshRenderer>();
-   mr2->setMesh(core->getResources()->load<Mesh>("Debug\\Assets\\models\\ball"));
-   mr2->setShader(core->getResources()->load<Shader>("Debug\\Assets\\Shaders\\vertShader", "Debug\\Assets\\Shaders\\fragShader"));
-   mr2->setTexture(core->getResources()->load<TextureResource>("Debug\\Assets\\Textures\\Material"));
-   mr2->getTransform()->setPosition(glm::vec3(0, 10, -100));
-   mr2->getTransform()->setScale(glm::vec3(0.25f, 0.25f, 0.25f));
-   mr2->getTransform()->rotate(glm::vec3(0, 0.0f, 0));
    
-   secondBall->getTransform()->gravityToggle();
-   secondBall->getTransform()->movableToggle();
-
-#entity number
-en 1
-#location l
-l 0,0,-100
-#scale s
-s 1.25f, 1.25f, 1.25f
-#rotation r
-r 0,0,0
-# model m
-m Debug\\Assets\\models\\ball
-# vertexshader vs
-vs Debug\\Assets\\Shaders\\vertShader
-#fragmentshader fs
-fs Debug\\Assets\\Shaders\\fragShader
-# texture t
-t Debug\\Assets\\Textures\\Whiskers_diffuse
-#move amount ma
-ma 0.0001f
-#friction f
-f 0.00f
-#spherecollider sc
-sc 1
-#scradius scr
-scr 3.1
-#gravity active ga
-ga 1
-

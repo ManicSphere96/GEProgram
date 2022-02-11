@@ -3,7 +3,8 @@
 #include <GL/glew.h>
 #include <glm/glm.hpp>
 #include <SDL2/SDL.h>
-
+#include <chrono>
+#include <thread>
 #include "Core.h"
 
 
@@ -220,11 +221,21 @@ namespace myengine
 			
 			for (size_t ei = 0; ei < m_Entities.size(); ++ei)
 			{
-				m_Entities.at(ei)->display();
+				
 				if ((m_Entities.at(ei)->getTransform()->getPosition().x > 50) || (m_Entities.at(ei)->getTransform()->getPosition().x < -50))
 				{
-					stop();
+					for (size_t i = 0; i < m_Entities.size(); ++i)
+					{
+						if (!m_Entities.at(i)->getComponent<MeshRenderer>()->getVisible())
+						{
+							m_Entities.at(i)->getComponent<MeshRenderer>()->VisibleToggle();
+						}
+							
+					}
+
+				
 				}
+				m_Entities.at(ei)->display();
 			}
 
 
@@ -236,6 +247,7 @@ namespace myengine
 
 			
 		}
+		std::this_thread::sleep_for(std::chrono::nanoseconds(1000000000));
 	}
 
 	void Core::stop()

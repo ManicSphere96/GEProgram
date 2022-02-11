@@ -43,7 +43,7 @@ add_library(myengine
     src/myengine/Keyboard.cpp
     src/myengine/Environment.cpp
     src/myengine/Screen.cpp
-#    src/myengine/Sound.cpp
+#   src/myengine/Sound.cpp
     src/myengine/TriangleRenderer.cpp
     src/myengine/Transform.cpp
     src/myengine/Model.cpp
@@ -53,7 +53,6 @@ add_library(myengine
 	src/myengine/Mesh.cpp
 	src/myengine/TextureResource.cpp
 	src/myengine/Shader.cpp
-	src/myengine/Player.cpp
 	src/myengine/SphereCollider.cpp
     src/myengine/Core.h
     src/myengine/Entity.h
@@ -73,7 +72,6 @@ add_library(myengine
 	src/myengine/Mesh.h
 	src/myengine/TextureResource.h
 	src/myengine/Shader.h
-	src/myengine/Player.h
 	src/myengine/SphereCollider.h
 #	src/myengine/stb_vorbis.c
 )
