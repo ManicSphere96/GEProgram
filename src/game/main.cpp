@@ -33,7 +33,7 @@ int main()
    levelFile.open("Debug\\Assets\\LevelFiles\\Level1.txt");
 
    float x, y, z, scale, rotationX, rotationY, rotationZ, frictionConstant, colliderSize;
-   std::string entityName, model, vert, frag, texture;
+   std::string entityName, model, vert, frag, texture, objSound;
    bool isPlayer, isGravity, isMoveable, isVisible, canDie;
 
 
@@ -43,7 +43,7 @@ int main()
    levelFile >> entityNumber;
    for (int ei = 0; ei < entityNumber; ei++)
    {
-	   levelFile >>entityName>> x >> y >> z >> scale >> rotationX >> rotationY >> rotationZ >> frictionConstant >> colliderSize >> model >> vert >> frag >> texture >> isPlayer >> isGravity >> isMoveable >> isVisible>> canDie;
+	   levelFile >>entityName>> x >> y >> z >> scale >> rotationX >> rotationY >> rotationZ >> frictionConstant >> colliderSize >> model >> vert >> frag >> texture >> objSound>> isPlayer >> isGravity >> isMoveable >> isVisible>> canDie;
 	   std::shared_ptr<Entity> entity = core->addEntity();
 	   std::shared_ptr<MeshRenderer> mr = entity->addComponent<MeshRenderer>();
 	   std::shared_ptr<GameComponent> gc = entity->addComponent<GameComponent>();
@@ -82,7 +82,7 @@ int main()
 	   {
 		   entity->getComponent<SphereCollider>()->toggleCanDie();
 	   }
-	   std::shared_ptr<Sound> sound = core->getResources()->load<Sound>("Debug\\Assets\\AudioClips\\horn");
+	   std::shared_ptr<Sound> sound = core->getResources()->load<Sound>(objSound);
 	   std::shared_ptr<SoundSource> source = entity->addComponent<SoundSource>();
 	   source->setClip(sound);
 
