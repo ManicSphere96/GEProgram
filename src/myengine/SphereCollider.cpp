@@ -1,3 +1,4 @@
+#define EPSILON 0.001
 #include <renderer.h>
 #include "SphereCollider.h"
 
@@ -29,7 +30,6 @@ namespace myengine
 		{
 			this->m_HitCount++;
 			collider->m_HitCount++;
-			m_HasCollided = true;
 			return true;
 
 		}
@@ -58,17 +58,52 @@ namespace myengine
 			collidingObj->getTransform()->setVelocity(itsVel);
 		}
 		else if ((this->getTransform()->getMovable()) && (!collidingObj->getTransform()->getMovable()))
-		{
-			
-			
-			this->getTransform()->setVelocity(this->getTransform()->getVelocity()- ( 2.0f * (glm::dot(this->getTransform()->getVelocity(), incedenceVector)*incedenceVector)));
+		{			
+			float incedenceVelScalar = glm::dot(myVel, incedenceVector);
+			getTransform()->setPosition(itsLoc + incedenceVector * (m_Radius + collidingObj->getRadius()));
+
+			if (incedenceVelScalar > -EPSILON)
+			{
+				getTransform()->setVelocity(myVel - (-incedenceVector * incedenceVelScalar));
+			}
+			this->getTransform()->setVelocity(this->getTransform()->getVelocity() - ( 2.0f * (glm::dot(this->getTransform()->getVelocity(), incedenceVector)*incedenceVector)));
 		}
 		else if ((!this->getTransform()->getMovable()) && (collidingObj->getTransform()->getMovable()))
 		{
+			float incedenceVelScalar = glm::dot(itsVel, incedenceVector);
+			collidingObj->getTransform()->setPosition(myLoc + incedenceVector * (m_Radius + collidingObj->getRadius()));
+			if (incedenceVelScalar > -EPSILON)
+			{
+				collidingObj->getTransform()->setVelocity(itsVel - (incedenceVector * incedenceVelScalar));
+				
+			}
+
 			collidingObj->getTransform()->setVelocity(collidingObj->getTransform()->getVelocity() - (2.0f * (glm::dot(collidingObj->getTransform()->getVelocity(), incedenceVector) * incedenceVector)));
 		}
 
 
+	}
+	void SphereCollider::toggleCanDie()
+	{
+		if (!m_CanDie)
+		{
+			m_CanDie = true;
+		}
+		else
+		{
+			m_CanDie = false;
+		}
+	}
+	void SphereCollider::toggleHasCollided()
+	{
+		if (!m_HasCollided)
+		{
+			m_HasCollided = true;
+		}
+		else
+		{
+			m_HasCollided = false;
+		}
 	}
 }
 

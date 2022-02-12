@@ -137,8 +137,8 @@ namespace myengine
 		}
 		if (m_CanMove)
 		{
-			m_Acceleration = m_Acceleration + (-m_Velocity * m_Friction);
-			glm::vec3 deltaPos = m_Velocity * getCore()->getEnvironment()->getDeltaTime();;
+			m_Velocity = m_Velocity + (-m_Velocity * m_Friction);
+			glm::vec3 deltaPos = m_Velocity * getCore()->getEnvironment()->getDeltaTime();
 			if (getCore()->getEnvironment()->getDeltaTime() == 0)
 			{
 				m_position = m_position + m_Velocity;
@@ -151,7 +151,7 @@ namespace myengine
 					m_Velocity = m_Velocity + (m_GravityConst * getCore()->getEnvironment()->getDeltaTime());
 				}
 				
-				m_position = m_position + deltaPos;
+				m_position = m_position + m_Velocity * getCore()->getEnvironment()->getDeltaTime();
 			}
 			if (m_Velocity != glm::vec3(0, 0, 0))
 			{

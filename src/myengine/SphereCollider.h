@@ -13,10 +13,14 @@ namespace myengine
 		int getHitCount() { return m_HitCount; }
 		int getHasCollided() { return m_HasCollided; }
 		float getRadius() { return m_Radius; }
+		bool getCanDie() { return m_CanDie; }
+		void toggleCanDie();
+		void toggleHasCollided();
 	private:
 		float m_Radius = 0.0f;
 		int m_HitCount = 0;
 		bool m_HasCollided = false;
+		bool m_CanDie = true;
 		
 	};
 }

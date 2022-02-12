@@ -3,7 +3,7 @@
 void GameComponent::testForDestroy()
 {
 	
-	if ((!this->getTransform()->getIsPlayer()) && (!this->getTransform()->getMovable()))
+	if ((!this->getTransform()->getIsPlayer()) && (!this->getTransform()->getMovable()) && (this->getComponent<SphereCollider>()->getCanDie() == true))
 	{
 		if (this->getEntity()->getComponent<SphereCollider>()->getHitCount() > 2)
 		{
@@ -14,8 +14,8 @@ void GameComponent::testForDestroy()
 }
 void GameComponent::onTick()
 {
-	testForDestroy();
 	testForCollision();
+	testForDestroy();
 	testForWin();
 }
 void GameComponent::testForWin()
@@ -26,6 +26,7 @@ void GameComponent::testForCollision()
 {
 	if (this->getEntity()->getComponent <SphereCollider>()->getHasCollided())
 	{
-		this->getEntity()->getComponent<SoundSource>()->playClip();
+		//this->getEntity()->getComponent<SoundSource>()->playClip();
+		this->getEntity()->getComponent <SphereCollider>()->toggleHasCollided();
 	}
 }
