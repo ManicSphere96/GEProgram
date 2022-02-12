@@ -28,7 +28,7 @@ namespace myengine
 		model = glm::rotate(model, glm::radians(m_rotation.y), glm::vec3(0, 1, 0));
 		model = glm::rotate(model, glm::radians(m_rotation.x), glm::vec3(1, 0, 0));
 		model = glm::rotate(model, glm::radians(m_rotation.z), glm::vec3(0, 0, 1));
-		
+		model = glm::scale(model, m_scale);
 
 		return model;
 	}
@@ -98,7 +98,7 @@ namespace myengine
 	}
 	void Transform::setScale(glm::vec3 scale)
 	{
-		scale = m_scale;
+		 m_scale = scale;
 	}
 
 	void Transform::onTick()

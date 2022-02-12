@@ -3,8 +3,7 @@
 #include <GL/glew.h>
 #include <glm/glm.hpp>
 #include <SDL2/SDL.h>
-#include <chrono>
-#include <thread>
+
 #include "Core.h"
 
 namespace myengine
@@ -222,9 +221,9 @@ namespace myengine
 			{
 				for (size_t j = i+1; j < m_CollidersVect.size(); j++)
 				{
-					if (m_CollidersVect[j]->isColliding(m_CollidersVect[i]))
+					if (m_CollidersVect[i]->isColliding(m_CollidersVect[j]))
 					{
-						m_CollidersVect[j]->currentlyColliding( m_CollidersVect[i]);
+						m_CollidersVect[i]->currentlyColliding( m_CollidersVect[j]);
 					}
 
 				}
@@ -234,11 +233,7 @@ namespace myengine
 			{
 				for (size_t sj = 0; sj < m_CollidersVect.size(); sj++)
 				{
-					if (m_ConvexCollidersVect[ci]->isColliding(m_CollidersVect[sj]))
-					{
-						m_ConvexCollidersVect[ci]->currentlyColliding(m_CollidersVect[sj]);
-					}
-
+					m_ConvexCollidersVect[ci]->isColliding(m_CollidersVect[sj]);
 				}
 			}
 			for (size_t ei = 0; ei < m_Entities.size(); ++ei)
@@ -261,12 +256,6 @@ namespace myengine
 
 			for (size_t ei = 0; ei < m_Entities.size(); ++ei)
 			{
-				
-				if ((m_Entities.at(ei)->getTransform()->getPosition().x > 50) || (m_Entities.at(ei)->getTransform()->getPosition().x < -50))
-				{
-					getEntityByName("endscreen");
-					stop();
-				}
 				m_Entities.at(ei)->display();
 			}
 
@@ -279,7 +268,7 @@ namespace myengine
 
 			
 		}
-		//std::this_thread::sleep_for(std::chrono::nanoseconds(1000000000));
+		
 	}
 
 	void Core::stop()

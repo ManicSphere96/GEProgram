@@ -85,6 +85,7 @@ int main()
 	   std::shared_ptr<Sound> sound = core->getResources()->load<Sound>("Debug\\Assets\\AudioClips\\horn");
 	   std::shared_ptr<SoundSource> source = entity->addComponent<SoundSource>();
 	   source->setClip(sound);
+
    }
   
    levelFile.close();

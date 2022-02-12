@@ -1,5 +1,6 @@
 #include "GameComponent.h"
-
+#include <chrono>
+#include <thread>
 void GameComponent::testForDestroy()
 {
 	
@@ -20,13 +21,19 @@ void GameComponent::onTick()
 }
 void GameComponent::testForWin()
 {
+	if (getCore()->getEntityByName("EndBall")->getComponent<SphereCollider>()->getCollidedName() == "PlayerBall")
+	{
+		getCore()->getEntityByName("endscreen")->getComponent<MeshRenderer>()->VisibleToggle();
+		std::this_thread::sleep_for(std::chrono::nanoseconds(1000000000));
+		getCore()->stop();
+	}
 
 }
 void GameComponent::testForCollision()
 {
 	if (this->getEntity()->getComponent <SphereCollider>()->getHasCollided())
 	{
-		//this->getEntity()->getComponent<SoundSource>()->playClip();
+		this->getEntity()->getComponent<SoundSource>()->playClip();
 		this->getEntity()->getComponent <SphereCollider>()->toggleHasCollided();
 	}
 }

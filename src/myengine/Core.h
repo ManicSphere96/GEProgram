@@ -2,6 +2,9 @@
 
 #pragma warning(disable: 26812) // emum type warning 
 
+#define EPSILON 0.5 // clamping small bouncing to this velocity
+#define GAMMA 1 // stopping sound on small bounces
+
 #include <memory>
 #include <vector>
 

@@ -1,4 +1,4 @@
-#define EPSILON 0.001
+
 #include <renderer.h>
 #include "SphereCollider.h"
 
@@ -30,12 +30,12 @@ namespace myengine
 		{
 			this->m_HitCount++;
 			collider->m_HitCount++;
+			m_CollidedName = collider->getEntity()->getName();
+			collider->setCollidedName(getEntity()->getName());
 			return true;
-
 		}
 		else
-		{
-			m_HasCollided = false;
+		{ 
 			return false;
 		}
 	}
@@ -60,25 +60,35 @@ namespace myengine
 		else if ((this->getTransform()->getMovable()) && (!collidingObj->getTransform()->getMovable()))
 		{			
 			float incedenceVelScalar = glm::dot(myVel, incedenceVector);
+			if (incedenceVelScalar < -GAMMA)
+			{
+				m_HasCollided = true;
+			}
 			getTransform()->setPosition(itsLoc + incedenceVector * (m_Radius + collidingObj->getRadius()));
 
 			if (incedenceVelScalar > -EPSILON)
 			{
 				getTransform()->setVelocity(myVel - (-incedenceVector * incedenceVelScalar));
+				m_HasCollided = false;
 			}
 			this->getTransform()->setVelocity(this->getTransform()->getVelocity() - ( 2.0f * (glm::dot(this->getTransform()->getVelocity(), incedenceVector)*incedenceVector)));
 		}
 		else if ((!this->getTransform()->getMovable()) && (collidingObj->getTransform()->getMovable()))
 		{
-			float incedenceVelScalar = glm::dot(itsVel, incedenceVector);
-			collidingObj->getTransform()->setPosition(myLoc + incedenceVector * (m_Radius + collidingObj->getRadius()));
+			float incedenceVelScalar = glm::dot(itsVel, -incedenceVector);
+			if (incedenceVelScalar < -GAMMA)
+			{
+				m_HasCollided = true;
+			}
+			collidingObj->getTransform()->setPosition(myLoc + -incedenceVector * (m_Radius + collidingObj->getRadius()));
 			if (incedenceVelScalar > -EPSILON)
 			{
-				collidingObj->getTransform()->setVelocity(itsVel - (incedenceVector * incedenceVelScalar));
+				collidingObj->getTransform()->setVelocity(itsVel - (-incedenceVector * incedenceVelScalar));
+				m_HasCollided = false;
 				
 			}
 
-			collidingObj->getTransform()->setVelocity(collidingObj->getTransform()->getVelocity() - (2.0f * (glm::dot(collidingObj->getTransform()->getVelocity(), incedenceVector) * incedenceVector)));
+			collidingObj->getTransform()->setVelocity(collidingObj->getTransform()->getVelocity() - (2.0f * (glm::dot(collidingObj->getTransform()->getVelocity(), -incedenceVector) * -incedenceVector)));
 		}
 
 

@@ -1,6 +1,7 @@
-3
-player 0 0 -40 1.25 0 -90 0 0.0001 1.0 Debug\\Assets\\models\\blendball Debug\\Assets\\Shaders\\vertShader Debug\\Assets\\Shaders\\fragShader  Debug\\Assets\\Textures\\Whiskers_diffuse 1 1 1 1
-ball1 0 10 -40 1.25 0 0 0 0.0001 1.0 Debug\\Assets\\models\\blendball Debug\\Assets\\Shaders\\vertShader Debug\\Assets\\Shaders\\fragShader  Debug\\Assets\\Textures\\Ball2 0 0 0 1
-endscreen 0 -3.1 -5 1.25 0 0 0 0.0000 1.0 Debug\\Assets\\models\\ball Debug\\Assets\\Shaders\\vertShader Debug\\Assets\\Shaders\\fragShader  Debug\\Assets\\Textures\\Win 0 0 0 0
+4
+ground 0 -30 -40 15 0 -90 0 0.05 -1.0 Debug\\Assets\\models\\cube2 Debug\\Assets\\Shaders\\vertShader Debug\\Assets\\Shaders\\fragShader  Debug\\Assets\\Textures\\Whiskers_diffuse 0 0 0 1 0
+ball1 3 0 -40 1 0 0 0 0.05 1.0 Debug\\Assets\\models\\blendball Debug\\Assets\\Shaders\\vertShader Debug\\Assets\\Shaders\\fragShader  Debug\\Assets\\Textures\\Ball2 0 1 1 1 1
+endscreen 0 -3.1 -5 1.25 0 0 0 0.0 1.0 Debug\\Assets\\models\\ball Debug\\Assets\\Shaders\\vertShader Debug\\Assets\\Shaders\\fragShader  Debug\\Assets\\Textures\\Win 0 0 0 0 0
+box 0 0 -40 1 0 0 0 0.0 1.0 Debug\\Assets\\models\\blendball Debug\\Assets\\Shaders\\vertShader Debug\\Assets\\Shaders\\fragShader  Debug\\Assets\\Textures\\Ball2 1 0 1 1 1
    
-   levelFile >>entityName>> x >> y >> z >> scale >> rotationX >> rotationY >> rotationZ >> frictionConstant >> colliderSize >> model >> vert >> frag >> texture >> isPlayer >> isGravity >> isMoveable >> isVisible;
+   levelFile >>entityName>> x >> y >> z >> scale >> rotationX >> rotationY >> rotationZ >> frictionConstant >> colliderSize >> model >> vert >> frag >> texture >> isPlayer >> isGravity >> isMoveable >> isVisible>> candie;

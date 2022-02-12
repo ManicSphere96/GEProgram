@@ -24,26 +24,15 @@ namespace myengine
 
 	bool ConvexCollider::isColliding(std::shared_ptr<SphereCollider> collider)
 	{
-		/*
-		float distancebetween = glm::distance(collider->getTransform()->getPosition(), getTransform()->getPosition());
-		if (distancebetween <= (m_Radius + ))
-		{
-			this->m_HitCount++;
-			collider->m_HitCount++;
-			return true;
-
-		}
-		else
-		{
-			return false;
-		}
-		*/
+		
 		bool isInside = true;
 		for (int pi = 0; pi < (int)m_Vao->getPlanes().size(); pi++)
 		{
 			// std::vector<struct bu::ConvexPlane> getPlanes() { return m_convexPlanes; };
 			// distance is the projection of the line from sphere center to point on plane onto the normal
-			float distance = glm::dot((collider->getTransform()->getPosition() - m_Vao->getPlanes()[pi].point), m_Vao->getPlanes()[pi].normal);
+			glm::vec4 transformedPt = getTransform()->getModel() * glm::vec4(m_Vao->getPlanes()[pi].point, 1.0f);
+			glm::vec3 point(transformedPt.x, transformedPt.y, transformedPt.z);
+			float distance = glm::dot((collider->getTransform()->getPosition() - point), m_Vao->getPlanes()[pi].normal);
 			if (distance > collider->getRadius())
 			{
 				isInside = false;
@@ -54,16 +43,53 @@ namespace myengine
 				if (distance > 0.0)
 				{
 					// incident vector will be the normal pointing the other way "-n"
-					SetIncident(-m_Vao->getPlanes()[pi].normal);
+					//SetIncident(-m_Vao->getPlanes()[pi].normal);
+					m_Incident = -m_Vao->getPlanes()[pi].normal;
+					glm::vec3 itsVel = collider->getTransform()->getVelocity();
+
+					float incedenceVelScalar = glm::dot(itsVel, m_Incident);
+					glm::vec3 incedencePoint = -m_Incident * distance + collider->getTransform()->getPosition();
+					if (incedenceVelScalar > GAMMA)
+					{
+						collider->setHasCollided(true);
+					}
+					collider->getTransform()->setPosition(collider->getTransform()->getPosition() + (-m_Incident * (collider->getRadius() - distance)));
+					if (incedenceVelScalar < EPSILON)
+					{
+						collider->getTransform()->setVelocity(itsVel - (m_Incident * incedenceVelScalar));
+
+						collider->setHasCollided(false);
+
+					}
+
+
+					collider->getTransform()->setVelocity(itsVel - (2.0f * (glm::dot(itsVel, -m_Incident) * -m_Incident)));
 				}
 			}
 		}
-		return false;
+		return isInside;
 	}
 	void ConvexCollider::currentlyColliding(std::shared_ptr<SphereCollider> collidingObj)
 	{
-		glm::vec3 itsVel = collidingObj->getTransform()->getVelocity();
-		collidingObj->getTransform()->setVelocity(itsVel - (2.0f * (glm::dot(itsVel, m_Incident) * m_Incident)));
+		/*glm::vec3 itsVel = collidingObj->getTransform()->getVelocity();
+		
+		float incedenceVelScalar = glm::dot(itsVel, m_Incident);
+		if (incedenceVelScalar < -GAMMA)
+		{
+			collidingObj->setHasCollided(true);
+		}
+		collidingObj->getTransform()->setPosition(myLoc + m_Incident * (m_Radius + collidingObj->getRadius()));
+		if (incedenceVelScalar > -EPSILON)
+		{
+			collidingObj->getTransform()->setVelocity(itsVel - (m_Incident * incedenceVelScalar));
+			
+			collidingObj->setHasCollided(false);
+
+		}
+
+
+	collidingObj->getTransform()->setVelocity(itsVel - (2.0f * (glm::dot(itsVel, m_Incident) * m_Incident)));
+	*/
 	}
 	
 }
