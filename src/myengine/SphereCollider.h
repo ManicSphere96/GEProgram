@@ -1,6 +1,5 @@
 #pragma once
 #include "Component.h"
-#include "Core.h"
 
 namespace myengine
 {
@@ -11,12 +10,13 @@ namespace myengine
 		void onDestroy();
 		bool isColliding(std::shared_ptr<SphereCollider> _collider);
 		void currentlyColliding(std::shared_ptr<SphereCollider> collidingObj);
-		void setRadius(float rad);
 		int getHitCount() { return m_HitCount; }
-		~SphereCollider();
+		int getHasCollided() { return m_HasCollided; }
+		float getRadius() { return m_Radius; }
 	private:
-		float m_Radius;
+		float m_Radius = 0.0f;
 		int m_HitCount = 0;
+		bool m_HasCollided = false;
 		
 	};
 }

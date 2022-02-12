@@ -1,9 +1,11 @@
 #pragma once
-#include "Component.h"
 
-#include <renderer.h>
 #include <iostream>
 #include <GL/glew.h>
+
+#include <renderer.h>
+
+#include "Component.h"
 
 namespace myengine
 {

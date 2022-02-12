@@ -1,3 +1,4 @@
+//#pragma once
 #ifdef BU_GL_H
   #error This header file should never need to be included twice!
 #endif
@@ -32,6 +33,12 @@ struct Face
   glm::vec2 lmca;
   glm::vec2 lmcb;
   glm::vec2 lmcc;
+};
+
+struct ConvexPlane
+{
+    glm::vec3 point;
+    glm::vec3 normal;
 };
 
 template <typename T>
@@ -96,7 +103,7 @@ void splitString(const std::string& input, char splitter,
 
 template <typename T>
 size_t loadModel(const std::string& path,
-  GLuint *positionsId, GLuint *tcsId, GLuint *normalsId,
+  GLuint *positionsId, GLuint *tcsId, GLuint *normalsId, std::vector<ConvexPlane>& convexPlanes,
   std::string& currentLine)
 {
   std::vector<glm::vec3> positions;
@@ -293,18 +300,37 @@ size_t loadModel(const std::string& path,
     // TODO
   }
 
+  // std::vector<ConvexPlane> convexPlanes
+  for (int fi = 0; fi < (int)faces.size(); fi++)
+  {
+      ConvexPlane cp;
+      cp.point = faces[fi].pa;
+      cp.normal = faces[fi].na;
+      bool dupFound = false;
+      for (int cpj = 0; cpj < (int)convexPlanes.size(); cpj++)
+       {
+          if (convexPlanes[cpj].normal == cp.normal)
+          { 
+              dupFound = true;
+              break;
+          }
+      }
+      if (!dupFound) convexPlanes.push_back(cp);
+  }
+
+
   return rtn;
 }
 
 template <typename T>
 size_t loadModel(const std::string& path,
-  GLuint *positionsId, GLuint *tcsId, GLuint *normalsId)
+  GLuint *positionsId, GLuint *tcsId, GLuint *normalsId, std::vector<ConvexPlane> *convexPlanes)
 {
   std::string currentLine = path;
 
   try
   {
-    return loadModel<int>(path, positionsId, tcsId, normalsId, currentLine);
+    return loadModel<int>(path, positionsId, tcsId, normalsId, *convexPlanes, currentLine);
   }
   catch(std::exception& e)
   {

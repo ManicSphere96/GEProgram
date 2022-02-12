@@ -1,7 +1,8 @@
 #pragma once
+#include <renderer.h>
+
 #include "Resource.h"
 
-#include <renderer.h>
 
 namespace myengine
 {

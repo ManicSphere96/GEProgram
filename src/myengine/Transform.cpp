@@ -1,4 +1,9 @@
+#define PI 3.1415925
+
 #include "Transform.h"
+#include "Keyboard.h"
+#include "Component.h"
+#include "Core.h"
 
 namespace myengine 
 {
@@ -133,20 +138,28 @@ namespace myengine
 		if (m_CanMove)
 		{
 			m_Acceleration = m_Acceleration + (-m_Velocity * m_Friction);
-
+			glm::vec3 deltaPos = m_Velocity * getCore()->getEnvironment()->getDeltaTime();;
 			if (getCore()->getEnvironment()->getDeltaTime() == 0)
 			{
 				m_position = m_position + m_Velocity;
 			}
 			else
 			{
-				m_Velocity = m_Velocity + (m_Acceleration / getCore()->getEnvironment()->getDeltaTime());
+				m_Velocity = m_Velocity + (m_Acceleration * getCore()->getEnvironment()->getDeltaTime());
 				if (m_Gravity)
 				{
-					m_Velocity = m_Velocity + (m_GravityConst / getCore()->getEnvironment()->getDeltaTime());
+					m_Velocity = m_Velocity + (m_GravityConst * getCore()->getEnvironment()->getDeltaTime());
 				}
-				m_position = m_position + m_Velocity;
-				m_rotation = m_rotation + m_RotationConst;
+				
+				m_position = m_position + deltaPos;
+			}
+			if (m_Velocity != glm::vec3(0, 0, 0))
+			{
+				glm::vec3 normalDPos = glm::normalize(deltaPos);
+				m_rotation = m_rotation + glm::vec3(
+					(-asinf(deltaPos.y / getComponent<SphereCollider>()->getRadius()) * 180.0f / PI),
+					(asinf(deltaPos.x / getComponent<SphereCollider>()->getRadius()) * 180.0f / PI),
+					(asinf(deltaPos.z / getComponent<SphereCollider>()->getRadius()) * 180.0f / PI));
 			}
 		}
 		m_Acceleration = glm::vec3(0, 0, 0);

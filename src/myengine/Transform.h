@@ -1,9 +1,10 @@
 #pragma once
 
-#include "Component.h"
-#include "Core.h"
 #include <glm/glm.hpp>
 #include <glm/ext.hpp>
+
+#include "Component.h"
+
 
 namespace myengine
 {
@@ -40,9 +41,9 @@ namespace myengine
 			float m_Friction = 0.0f;
 			bool m_CanMove;
 			bool m_Gravity;
-			glm::vec3 m_GravityConst = glm::vec3 (0.0f,0.0001f,0.0f);
+			glm::vec3 m_GravityConst = glm::vec3 (0.0f,10.0f,0.0f);
 			glm::vec3 m_RotationConst = glm::vec3(1.0f, 2.0f, .0f);
-			float m_MoveAmount = 0.001f;
+			float m_MoveAmount = 1.0f;
 			bool m_IsPlayer = false;
 	};
 }

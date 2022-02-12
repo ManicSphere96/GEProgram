@@ -1,7 +1,6 @@
 #pragma once
-
+#include <chrono>
 #pragma warning(disable: 26812) // emum type warning
-#include <SDL2/SDL.h>
 
 namespace myengine
 {
@@ -13,6 +12,6 @@ namespace myengine
 			void tick();
 		private:
 			float dt;
-			float last;
+			std::chrono::time_point<std::chrono::high_resolution_clock> last;
 	};
 }

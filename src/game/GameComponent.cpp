@@ -15,9 +15,17 @@ void GameComponent::testForDestroy()
 void GameComponent::onTick()
 {
 	testForDestroy();
+	testForCollision();
 	testForWin();
 }
 void GameComponent::testForWin()
 {
 
+}
+void GameComponent::testForCollision()
+{
+	if (this->getEntity()->getComponent <SphereCollider>()->getHasCollided())
+	{
+		this->getEntity()->getComponent<SoundSource>()->playClip();
+	}
 }

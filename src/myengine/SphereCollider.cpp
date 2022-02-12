@@ -1,7 +1,13 @@
+#include <renderer.h>
 #include "SphereCollider.h"
-#include "Core.h"
-#include "Entity.h"
+
+// This should not have to be added, but without it the compiler says:
+// Error	C2027	use of undefined type 'myengine::Core'	myengine	
+#include "Core.h" 
+
+#include "Component.h"
 #include "Transform.h"
+
 
 namespace myengine
 {
@@ -23,11 +29,13 @@ namespace myengine
 		{
 			this->m_HitCount++;
 			collider->m_HitCount++;
+			m_HasCollided = true;
 			return true;
 
 		}
 		else
 		{
+			m_HasCollided = false;
 			return false;
 		}
 	}
@@ -60,10 +68,6 @@ namespace myengine
 			collidingObj->getTransform()->setVelocity(collidingObj->getTransform()->getVelocity() - (2.0f * (glm::dot(collidingObj->getTransform()->getVelocity(), incedenceVector) * incedenceVector)));
 		}
 
-
-	}
-	SphereCollider::~SphereCollider()
-	{
 
 	}
 }

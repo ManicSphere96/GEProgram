@@ -12,6 +12,7 @@ public:
 	
 	void testForDestroy();
 	void testForWin();
+	void testForCollision();
 	void onTick();
 
 private:

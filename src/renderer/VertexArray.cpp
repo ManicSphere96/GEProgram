@@ -3,7 +3,7 @@
 
 #pragma warning(disable: 4101) //Unused variable for execption 'e' in bugl2.h
 #pragma warning(disable: 26451) // 4 byte to 8 byte cast. Check build target 32 vs 64
-#include "bugl2.h"
+
 
 namespace renderer
 {
@@ -11,7 +11,7 @@ namespace renderer
 	{
 		/// Sets up the vertex array with a path to the model
 
-		vertCount = buLoadModel(path, &positionsVbo, &tcsVbo, &normalsVbo);
+		vertCount = buLoadModel(path, &positionsVbo, &tcsVbo, &normalsVbo, &m_convexPlanes);
 
 		glGenVertexArrays(1, &vaoId);
 		if (!vaoId) throw std::exception();

@@ -43,7 +43,8 @@ add_library(myengine
     src/myengine/Keyboard.cpp
     src/myengine/Environment.cpp
     src/myengine/Screen.cpp
-#   src/myengine/Sound.cpp
+    src/myengine/Sound.cpp
+	src/myengine/SoundSource.cpp
     src/myengine/TriangleRenderer.cpp
     src/myengine/Transform.cpp
     src/myengine/Model.cpp
@@ -54,13 +55,15 @@ add_library(myengine
 	src/myengine/TextureResource.cpp
 	src/myengine/Shader.cpp
 	src/myengine/SphereCollider.cpp
+	src/myengine/ConvexCollider.cpp
     src/myengine/Core.h
     src/myengine/Entity.h
     src/myengine/Component.h
     src/myengine/Keyboard.h
     src/myengine/Environment.h
     src/myengine/Screen.h
-#   src/myengine/Sound.h
+    src/myengine/Sound.h
+	src/myengine/SoundSource.h
     src/myengine/Shader.h
     src/myengine/TriangleRenderer.h
     src/myengine/Transform.h
@@ -73,7 +76,8 @@ add_library(myengine
 	src/myengine/TextureResource.h
 	src/myengine/Shader.h
 	src/myengine/SphereCollider.h
-#	src/myengine/stb_vorbis.c
+ 	src/myengine/ConvexCollider.h
+	src/myengine/stb_vorbis.c
 )
 #set_target_properties(myengine PROPERTIES COMPILE_FLAGS "-m32" LINK_FLAGS "-m32")
 target_link_libraries(myengine)
@@ -81,8 +85,8 @@ link_libraries(renderer myengine glew32 OpenGL32)
 
 add_executable(game
    src/game/main.cpp
-   src/game/test.cpp
-   src/game/test.h
+   src/game/GameComponent.cpp
+   src/game/GameComponent.h
  
 )
 set_target_properties(game PROPERTIES LINK_FLAGS /stack:64000)

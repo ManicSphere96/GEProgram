@@ -1,6 +1,8 @@
+#pragma once
+#include <vector>
+
 #include "Component.h"
 
-#include <vector>
 
 namespace myengine
 {

@@ -72,7 +72,18 @@ int main()
 	   {
 		   std::shared_ptr<SphereCollider> col1 = entity->addComponent<SphereCollider>(colliderSize);
 	   }
+	   if (colliderSize < 0.0)
+	   {
+		   //mr->getMesh()->getVao()
+		   std::shared_ptr<ConvexCollider> col1 = entity->addComponent<ConvexCollider>(mr->getMesh()->getVao());
+		   //std::shared_ptr<ConvexCollider> col1 = entity->addComponent < ConvexCollider>(1.0f);
+	   }
+	   std::shared_ptr<Sound> sound = core->getResources()->load<Sound>("Debug\\Assets\\AudioClips\\horn");
+	   std::shared_ptr<SoundSource> source = entity->addComponent<SoundSource>();
+	   source->setClip(sound);
    }
+  
+   levelFile.close();
    core->start();
 
    return 0;

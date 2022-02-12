@@ -7,7 +7,6 @@
 #include <thread>
 #include "Core.h"
 
-
 namespace myengine
 {
 	std::shared_ptr<Core> Core::initialize()
@@ -146,7 +145,7 @@ namespace myengine
 
 	void Core::unregisterCollider(SphereCollider* collider)
 	{
-		
+
 		for (int i = 0; i < (int)m_CollidersVect.size(); i++)
 		{
 			//std::shared_ptr<SphereCollider> spcolider = collider;
@@ -157,10 +156,26 @@ namespace myengine
 			}
 		}
 	}
-	
-	
-		
-	
+
+	void Core::registerConvexCollider(std::shared_ptr<myengine::ConvexCollider> convexCollider)
+	{
+		m_ConvexCollidersVect.push_back(convexCollider);
+	}
+
+	void Core::unregisterConvexCollider(ConvexCollider* convexCollider)
+	{
+
+		for (int i = 0; i < (int)m_ConvexCollidersVect.size(); i++)
+		{
+			//std::shared_ptr<BoxCollider> spcolider = collider;
+			if (m_ConvexCollidersVect[i].get() == convexCollider)
+			{
+				m_ConvexCollidersVect.erase(m_ConvexCollidersVect.begin() + i);
+				i--;
+			}
+		}
+	}
+
 
 	void Core::start()
 	{
@@ -202,8 +217,7 @@ namespace myengine
 
 			glEnable(GL_DEPTH_TEST);
 
-			// It will then run a for loop checking each entity in the
-			// entities vector and then run the tick function 
+			// Loop through all Sphere colliders check if they are sphere-sphere hits and process.
 			for (size_t i = 0; i < m_CollidersVect.size(); i++)
 			{
 				for (size_t j = i+1; j < m_CollidersVect.size(); j++)
@@ -211,6 +225,18 @@ namespace myengine
 					if (m_CollidersVect[j]->isColliding(m_CollidersVect[i]))
 					{
 						m_CollidersVect[j]->currentlyColliding( m_CollidersVect[i]);
+					}
+
+				}
+			}
+			// Loop through all Convex colliders check if they are convex-sphere hits and process.
+			for (size_t ci = 0; ci < m_ConvexCollidersVect.size(); ci++)
+			{
+				for (size_t sj = 0; sj < m_CollidersVect.size(); sj++)
+				{
+					if (m_ConvexCollidersVect[ci]->isColliding(m_CollidersVect[sj]))
+					{
+						m_ConvexCollidersVect[ci]->currentlyColliding(m_CollidersVect[sj]);
 					}
 
 				}
