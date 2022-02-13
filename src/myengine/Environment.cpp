@@ -9,25 +9,25 @@ namespace myengine
 {
 	Environment::Environment()
 	{
-		dt = 0.033f;
-		last = Clock::now();
+		m_Dt = 0.033f;
+		m_Last = Clock::now();
 	}
 
 	float Environment::getDeltaTime()
 	{
 		/// Returns delta time
 
-		return (dt > 0.033f) ? 0.033f: dt;
+		return (m_Dt > 0.033f) ? 0.033f: m_Dt;
 	}
 
 	void Environment::tick()
 	{
 		/// Calculates current delta time
 		std::chrono::time_point<std::chrono::high_resolution_clock> current = Clock::now();
-		std::chrono::duration<double> diff = current - last;
+		std::chrono::duration<double> diff = current - m_Last;
 
-		dt = (float)diff.count();
-		std::cout << "dt:" << dt << std::endl;
-		last = current;
+		m_Dt = (float)diff.count();
+		std::cout << "dt:" << m_Dt << std::endl;
+		m_Last = current;
 	}
 }

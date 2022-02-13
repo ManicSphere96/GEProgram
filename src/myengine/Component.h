@@ -9,7 +9,6 @@ namespace myengine
 	struct Keyboard;
 	struct Transform;
 
-
 	struct Component
 	{
 		public:
@@ -28,7 +27,6 @@ namespace myengine
 		private:
 			friend struct myengine::Entity;
 			std::weak_ptr<Entity> m_Entity;
-			
 			void tick();
 			void display();
 			void play();

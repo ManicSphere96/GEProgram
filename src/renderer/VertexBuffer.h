@@ -17,9 +17,9 @@ namespace renderer
 			size_t getSize();
 			GLuint getId();
 		private:
-			GLuint id;
-			std::vector<float> data;
-			bool dirty;
-			int components;
+			GLuint m_Id;
+			std::vector<float> m_Data;
+			bool m_Dirty;
+			int m_Components;
 	};
 }

@@ -8,16 +8,9 @@
 
 namespace myengine
 {
-	void MeshRenderer::VisibleToggle()
+	void MeshRenderer::setVisible(bool visible)
 	{
-		if (m_IsVisible)
-		{
-			m_IsVisible = false;
-		}
-		else
-		{
-			m_IsVisible = true;
-		}
+		m_IsVisible = visible;
 	}
 
 	void MeshRenderer::onDisplay()
@@ -71,7 +64,7 @@ namespace myengine
 
 
 			// Draws model
-			m_Program->m_ShaderProgram->draw(m_Mesh->vao);
+			m_Program->m_ShaderProgram->draw(m_Mesh->m_Vao);
 		}
 	}
 }

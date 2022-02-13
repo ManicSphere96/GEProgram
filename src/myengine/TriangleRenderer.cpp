@@ -15,17 +15,17 @@ namespace myengine
 	{
 		std::cout << "Initializing..." << std::endl;
 
-		vbo = std::make_shared<renderer::VertexBuffer>();
-		vbo->add(glm::vec3(0.0f, 0.5f, 0.0f));
-		vbo->add(glm::vec3(-0.5f, -0.5f, 0.0f));
-		vbo->add(glm::vec3(0.5f, -0.5f, 0.0f));
+		m_Vbo = std::make_shared<renderer::VertexBuffer>();
+		m_Vbo->add(glm::vec3(0.0f, 0.5f, 0.0f));
+		m_Vbo->add(glm::vec3(-0.5f, -0.5f, 0.0f));
+		m_Vbo->add(glm::vec3(0.5f, -0.5f, 0.0f));
+		
+		m_Vao = std::make_shared<renderer::VertexArray>();
+		
+		m_Vao->setBuffer(0, m_Vbo);
+		m_Vao->getId();
 
-		vao = std::make_shared<renderer::VertexArray>();
-
-		vao->setBuffer(0, vbo);
-		vao->getId();
-
-		shaderProgram = std::make_shared<renderer::ShaderProgram>("../Assets/Shaders/vertShader.txt", "../Assets/Shaders/fragShader.txt");
+		m_ShaderProgram = std::make_shared<renderer::ShaderProgram>("../Assets/Shaders/vertShader.txt", "../Assets/Shaders/fragShader.txt");
 
 		getTransform()->setPosition(glm::vec3(0, 0, -2.5f));
 
@@ -34,9 +34,9 @@ namespace myengine
 
 	void TriangleRenderer::onDisplay()
 	{	
-		shaderProgram->setUniform("u_Model", getTransform()->getModel());
+		m_ShaderProgram->setUniform("u_Model", getTransform()->getModel());
 
-		shaderProgram->draw(vao);
+		m_ShaderProgram->draw(m_Vao);
 	}
 
 	void TriangleRenderer::onTick()

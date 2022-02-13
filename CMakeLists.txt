@@ -19,64 +19,63 @@ add_definitions(-DSDL_MAIN_HANDLED)
 
 
 add_library(renderer
-   src/renderer/renderer.cpp
-   src/renderer/ShaderProgram.cpp
-   src/renderer/VertexArray.cpp
-   src/renderer/VertexBuffer.cpp
-   src/renderer/Texture.cpp
-   src/renderer/renderer.h
-   src/renderer/ShaderProgram.h
-   src/renderer/VertexArray.h
-   src/renderer/VertexBuffer.h
-   src/renderer/Texture.h
-   src/renderer/Sampler.h
-   src/renderer/bugl2.h
-   src/renderer/stb_image.h
+	src/renderer/renderer.cpp
+	src/renderer/ShaderProgram.cpp
+	src/renderer/VertexArray.cpp
+	src/renderer/VertexBuffer.cpp
+	src/renderer/Texture.cpp
+	src/renderer/renderer.h
+	src/renderer/Sampler.h
+	src/renderer/ShaderProgram.h
+	src/renderer/VertexArray.h
+	src/renderer/VertexBuffer.h
+	src/renderer/Texture.h
+	src/renderer/bugl2.h
+	src/renderer/stb_image.h
 )
 #set_target_properties(renderer PROPERTIES COMPILE_FLAGS "-m32" LINK_FLAGS "-m32")
 target_link_libraries(renderer)
 
 add_library(myengine
  	src/myengine/Core.cpp
-    src/myengine/Entity.cpp
     src/myengine/Component.cpp
-    src/myengine/Keyboard.cpp
-    src/myengine/Environment.cpp
-    src/myengine/Screen.cpp
+	src/myengine/ConvexCollider.cpp
+	src/myengine/Entity.cpp
+	src/myengine/Environment.cpp
+	src/myengine/Keyboard.cpp
+    src/myengine/Mesh.cpp
+    src/myengine/MeshRenderer.cpp
+    src/myengine/Model.cpp
+	src/myengine/Resource.cpp
+	src/myengine/Resources.cpp
+	src/myengine/Screen.cpp
+    src/myengine/Shader.cpp
     src/myengine/Sound.cpp
 	src/myengine/SoundSource.cpp
-    src/myengine/TriangleRenderer.cpp
-    src/myengine/Transform.cpp
-    src/myengine/Model.cpp
-    src/myengine/Mouse.cpp
-    src/myengine/MeshRenderer.cpp
-	src/myengine/Resource.cpp
-	src/myengine/Mesh.cpp
-	src/myengine/TextureResource.cpp
-	src/myengine/Shader.cpp
 	src/myengine/SphereCollider.cpp
-	src/myengine/ConvexCollider.cpp
-    src/myengine/Core.h
-    src/myengine/Entity.h
-    src/myengine/Component.h
-    src/myengine/Keyboard.h
-    src/myengine/Environment.h
-    src/myengine/Screen.h
-    src/myengine/Sound.h
-	src/myengine/SoundSource.h
-    src/myengine/Shader.h
-    src/myengine/TriangleRenderer.h
-    src/myengine/Transform.h
-    src/myengine/Trigger.h
-    src/myengine/Model.h
-    src/myengine/Mouse.h
-    src/myengine/MeshRenderer.h
- 	src/myengine/Resource.h
+	src/myengine/TextureResource.cpp
+    src/myengine/Transform.cpp
+    src/myengine/TriangleRenderer.cpp
+	src/myengine/Core.h
+	src/myengine/Component.h
+	src/myengine/ConvexCollider.h
+	src/myengine/Entity.h
+	src/myengine/Environment.h
+	src/myengine/Keyboard.h
 	src/myengine/Mesh.h
-	src/myengine/TextureResource.h
+	src/myengine/MeshRenderer.h
+	src/myengine/Model.h
+	src/myengine/Resource.h
+	src/myengine/Resources.h
+	src/myengine/Screen.h
 	src/myengine/Shader.h
+	src/myengine/Sound.h
+	src/myengine/SoundSource.h
 	src/myengine/SphereCollider.h
- 	src/myengine/ConvexCollider.h
+	src/myengine/stb_vorbis.h
+	src/myengine/TextureResource.h
+	src/myengine/Transform.h
+	src/myengine/TriangleRenderer.h
 	src/myengine/stb_vorbis.c
 )
 #set_target_properties(myengine PROPERTIES COMPILE_FLAGS "-m32" LINK_FLAGS "-m32")

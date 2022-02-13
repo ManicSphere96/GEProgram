@@ -17,7 +17,7 @@ namespace myengine
 			template <typename T>
 			std::shared_ptr<T> addComponent()
 			{
-				/// Adds a component to an entity
+				// Adds a component to an entity
 
 				// Creates a shared pointer for the component
 				std::shared_ptr<T> componentPtr = std::make_shared<T>();
@@ -55,7 +55,7 @@ namespace myengine
 			template <typename T, typename A, typename B>
 			std::shared_ptr<T> addComponent(A a, B b)
 			{
-				/// Adds a component to an entity and assigns two parameter to it
+				// Adds a component to an entity and assigns two parameter to it
 				std::shared_ptr<T> componentPtr = std::make_shared<T>();
 				componentPtr->m_Entity = m_EntitySelf;
 				m_Components.push_back(componentPtr);
@@ -66,7 +66,7 @@ namespace myengine
 			template <typename T, typename A, typename B, typename C>
 			std::shared_ptr<T> addComponent(A a, B b, C c)
 			{
-				/// Adds a component to an entity and assigns three parameter to it
+				// Adds a component to an entity and assigns three parameter to it
 				std::shared_ptr<T> componentPtr = std::make_shared<T>();
 				componentPtr->m_Entity = m_EntitySelf;
 				m_Components.push_back(componentPtr);
@@ -77,7 +77,7 @@ namespace myengine
 			template <typename T>
 			std::shared_ptr<T> getComponent()
 			{
-				/// Returns the component 
+				// Returns the component 
 				for (size_t ci = 0; ci < m_Components.size(); ci++)
 				{
 					std::shared_ptr<T> rtn = std::dynamic_pointer_cast<T>(m_Components.at(ci));
@@ -87,7 +87,7 @@ namespace myengine
 						return rtn;
 					}
 				}
-				throw std::exception("Failed to obtain specified component");
+				return std::shared_ptr<T>(NULL);
 			}
 
 

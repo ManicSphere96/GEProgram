@@ -202,7 +202,7 @@ namespace myengine
 				}
 				else if (incomingEvent.type == SDL_KEYDOWN)
 				{
-					m_Keyboard->keys.push_back(incomingEvent.key.keysym.sym); 
+					m_Keyboard->m_Keys.push_back(incomingEvent.key.keysym.sym); 
 				}
 				else if (incomingEvent.type == SDL_KEYUP)
 				{
@@ -247,7 +247,7 @@ namespace myengine
 			{
 				if (m_Entities.at(ei)->m_DestroyMe == true)
 				{
-					RemoveEntity(m_Entities.at(ei));
+					removeEntity(m_Entities.at(ei));
 
 					ei--;
 				}
@@ -275,7 +275,7 @@ namespace myengine
 	{
 		m_Running = false;
 	}
-	void Core::FlushCore()
+	void Core::flushCore()
 	{
 		for (size_t ei = 0; ei < m_Entities.size(); ++ei)
 		{
@@ -283,7 +283,7 @@ namespace myengine
 		}
 
 	}
-	void Core::RemoveEntity(std::shared_ptr<Entity> deleteentity)
+	void Core::removeEntity(std::shared_ptr<Entity> deleteentity)
 	{
 		for (size_t ei = 0; ei < m_Entities.size(); ++ei)
 		{

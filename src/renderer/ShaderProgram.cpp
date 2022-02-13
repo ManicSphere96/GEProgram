@@ -86,24 +86,24 @@ namespace renderer
 			throw std::exception();
 		}
 
-		id = glCreateProgram();
-		glAttachShader(id, vertexShaderId);
-		glAttachShader(id, fragShaderId);
+		m_Id = glCreateProgram();
+		glAttachShader(m_Id, vertexShaderId);
+		glAttachShader(m_Id, fragShaderId);
 
-		glBindAttribLocation(id, 0, "in_Position");
-		glBindAttribLocation(id, 1, "in_Texcoord");
+		glBindAttribLocation(m_Id, 0, "in_Position");
+		glBindAttribLocation(m_Id, 1, "in_Texcoord");
 
-		glLinkProgram(id);
-		glGetProgramiv(id, GL_LINK_STATUS, &success);
+		glLinkProgram(m_Id);
+		glGetProgramiv(m_Id, GL_LINK_STATUS, &success);
 
 		if (!success)
 		{
 			throw std::exception();
 		}
 
-		glDetachShader(id, vertexShaderId);
+		glDetachShader(m_Id, vertexShaderId);
 		glDeleteShader(vertexShaderId);
-		glDetachShader(id, fragShaderId);
+		glDetachShader(m_Id, fragShaderId);
 		glDeleteShader(fragShaderId);
 
 		glm::mat4 projection = glm::perspective(glm::radians(45.0f), (float)800 / (float)800, 0.1f, 100.0f);
@@ -122,23 +122,23 @@ namespace renderer
 
 	ShaderProgram::~ShaderProgram()
 	{
-		glDeleteProgram(id);
+		glDeleteProgram(m_Id);
 	}
 
 	void ShaderProgram::draw(std::shared_ptr<VertexArray> vertexArray)
 	{
 		/// Draws the model/triangle
 
-		glUseProgram(id);
+		glUseProgram(m_Id);
 		glBindVertexArray(vertexArray->getId());
 
-		for (size_t i = 0; i < samplers.size(); i++)
+		for (size_t i = 0; i < m_Samplers.size(); i++)
 		{
 			glActiveTexture((GLenum)(GL_TEXTURE0 + i));
 
-			if (samplers.at(i).texture)
+			if (m_Samplers.at(i).m_Texture)
 			{
-				glBindTexture(GL_TEXTURE_2D, samplers.at(i).texture->getId());
+				glBindTexture(GL_TEXTURE_2D, m_Samplers.at(i).m_Texture->getId());
 			}
 			else
 			{
@@ -148,7 +148,7 @@ namespace renderer
 
 		glDrawArrays(GL_TRIANGLES, 0, (GLsizei)vertexArray->getVertCount());
 
-		for (size_t i = 0; i < samplers.size(); i++)
+		for (size_t i = 0; i < m_Samplers.size(); i++)
 		{
 			glActiveTexture((GLenum)(GL_TEXTURE0 + i));
 			glBindTexture(GL_TEXTURE_2D, 0);
@@ -162,8 +162,8 @@ namespace renderer
 	{
 		/// Sets the uniform value with the name provided by the string
 
-		glUseProgram(id);
-		GLint loc = glGetUniformLocation(id, name.c_str());
+		glUseProgram(m_Id);
+		GLint loc = glGetUniformLocation(m_Id, name.c_str());
 		glUniformMatrix4fv(loc, 1, GL_FALSE, glm::value_ptr(uniform));
 		glUseProgram(0);
 	}
@@ -172,8 +172,8 @@ namespace renderer
 	{
 		/// Sets the uniform value with the name provided by the string
 
-		glUseProgram(id);
-		GLint loc = glGetUniformLocation(id, name.c_str());
+		glUseProgram(m_Id);
+		GLint loc = glGetUniformLocation(m_Id, name.c_str());
 		glUniform3f(loc, uniform.x, uniform.y, uniform.z);
 		glUseProgram(0);
 	}
@@ -182,8 +182,8 @@ namespace renderer
 	{
 		/// Sets the uniform value with the name provided by the string
 
-		glUseProgram(id);
-		GLint loc = glGetUniformLocation(id, name.c_str());
+		glUseProgram(m_Id);
+		GLint loc = glGetUniformLocation(m_Id, name.c_str());
 		glUniform4f(loc, uniform.x, uniform.y, uniform.z, uniform.w);
 		glUseProgram(0);
 	}
@@ -192,8 +192,8 @@ namespace renderer
 	{
 		/// Sets the uniform for the texture with the name provided by the string
 
-		glUseProgram(id);
-		glUniform1i(glGetUniformLocation(id, name.c_str()), 0);
+		glUseProgram(m_Id);
+		glUniform1i(glGetUniformLocation(m_Id, name.c_str()), 0);
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, texture->getId());
 		glUseProgram(0);
@@ -203,8 +203,8 @@ namespace renderer
 	{
 		/// Sets the uniform float value with the name provided by the string
 
-		glUseProgram(id);
-		GLint loc = glGetUniformLocation(id, name.c_str());
+		glUseProgram(m_Id);
+		GLint loc = glGetUniformLocation(m_Id, name.c_str());
 		glUniform1f(loc, uniform);
 		glUseProgram(0);
 	}
@@ -213,6 +213,6 @@ namespace renderer
 	{
 		/// Returns the id
 
-		return id;
+		return m_Id;
 	}
 }

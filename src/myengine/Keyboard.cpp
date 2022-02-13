@@ -10,9 +10,9 @@ namespace myengine
 		 * true, otherwise it will return false
 		 */
 
-		for (int i = 0; i < (int)keys.size(); i++)
+		for (int i = 0; i < (int)m_Keys.size(); i++)
 		{
-			if (keys.at(i) == keyCode)
+			if (m_Keys.at(i) == keyCode)
 			{
 				std::cout << keyCode;
 				return true;
@@ -41,11 +41,11 @@ namespace myengine
 		 * any keys which are not being pressed
 		 */
 
-		for (int i = 0; i < (int)keys.size(); i++)
+		for (int i = 0; i < (int)m_Keys.size(); i++)
 		{
-			if (keys.at(i) == key)
+			if (m_Keys.at(i) == key)
 			{
-				keys.erase(keys.begin() + i);
+				m_Keys.erase(m_Keys.begin() + i);
 				i--;
 			}
 		}

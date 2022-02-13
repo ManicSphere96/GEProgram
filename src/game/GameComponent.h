@@ -14,7 +14,10 @@ public:
 	void testForWin();
 	void testForCollision();
 	void onTick();
+	float addDeltaTime();
 
 private:
-	
+	float m_AddDeltaTime = 0.0f;
+	bool m_Win = false;
+
 };

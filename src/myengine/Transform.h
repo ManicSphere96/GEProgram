@@ -28,7 +28,7 @@ namespace myengine
 			void setScale(glm::vec3 scale);
 			void setFriction(float friction);
 			void setVelocity(glm::vec3 vel);
-			void SetIsPlayer(bool isPlayer) { m_IsPlayer = isPlayer; };
+			void setIsPlayer(bool isPlayer) { m_IsPlayer = isPlayer; };
 			void gravityToggle();
 			void movableToggle();
 			void onTick();

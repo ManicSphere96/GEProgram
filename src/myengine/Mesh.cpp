@@ -8,6 +8,6 @@ namespace myengine
 	void Mesh::onInit()
 	{
 		
-		vao = std::make_shared<renderer::VertexArray>(m_Path + ".obj");
+		m_Vao = std::make_shared<renderer::VertexArray>(m_Path + ".obj");
 	}
 }

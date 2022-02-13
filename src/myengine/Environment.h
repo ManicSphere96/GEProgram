@@ -11,7 +11,7 @@ namespace myengine
 			float getDeltaTime();
 			void tick();
 		private:
-			float dt;
-			std::chrono::time_point<std::chrono::high_resolution_clock> last;
+			float m_Dt;
+			std::chrono::time_point<std::chrono::high_resolution_clock> m_Last;
 	};
 }

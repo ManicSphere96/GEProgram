@@ -6,27 +6,27 @@ namespace myengine
 	{
 		/// Sets the width for the screen using the parameter provided
 
-		width = w;
+		m_Width = w;
 	}
 
 	void Screen::setHeight(int h)
 	{
 		/// Sets the height for the screen using the parameter provided
 
-		height = h;
+		m_Height = h;
 	}
 
 	int Screen::getWidth()
 	{
 		/// Returns the width of the screen
 
-		return width;
+		return m_Width;
 	}
 
 	int Screen::getHeight()
 	{
 		/// Returns the height of the screen
 
-		return height;
+		return m_Height;
 	}
 }

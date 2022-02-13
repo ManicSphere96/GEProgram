@@ -1,5 +1,5 @@
 #include "Sound.h"
-#include "stb_vorbis.c"
+#include "stb_vorbis.h"
 
 namespace myengine
 {

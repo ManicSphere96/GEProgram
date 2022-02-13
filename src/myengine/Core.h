@@ -11,6 +11,7 @@
 #include <SDL2/SDL.h>
 #include <AL/al.h>
 #include <AL/alc.h>
+
 #include <renderer.h>
 
 #include "Entity.h"
@@ -22,9 +23,7 @@
 #include "Keyboard.h"
 #include "Transform.h"
 #include "TriangleRenderer.h"
-//#include "Trigger.h"
 #include "Model.h"
-//#include "Mouse.h"
 #include "Sound.h"
 #include "SoundSource.h"
 #include "Resource.h"
@@ -42,7 +41,7 @@ namespace myengine
 	{
 	public:
 		static std::shared_ptr<Core> initialize();
-		void FlushCore();
+		void flushCore();
 		std::shared_ptr<Entity> addEntity();
 		std::shared_ptr<Environment> getEnvironment();
 		std::shared_ptr<Keyboard> getKeyboard();
@@ -54,7 +53,7 @@ namespace myengine
 		void unregisterConvexCollider(ConvexCollider* convexCollider);
 		void start();
 		void stop();
-		void RemoveEntity(std::shared_ptr<Entity> delteentity);
+		void removeEntity(std::shared_ptr<Entity> delteentity);
 		std::shared_ptr<Entity> getEntityByName(std::string name);
 	private:
 		bool m_Running = false;
@@ -65,7 +64,6 @@ namespace myengine
 		std::shared_ptr<Environment> m_Environment;
 		std::shared_ptr<Screen> m_Screen;
 		std::shared_ptr<Keyboard> m_Keyboard;
-		//std::shared_ptr<Sound> sound;
 		std::weak_ptr<Core> m_CoreSelf;
 		SDL_Window* m_Window = NULL;
 		ALCdevice* m_Device = NULL;

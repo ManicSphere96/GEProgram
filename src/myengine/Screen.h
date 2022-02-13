@@ -13,7 +13,7 @@ namespace myengine
 			int getWidth();
 			int getHeight();
 		private:
-			int width;
-			int height;
+			int m_Width;
+			int m_Height;
 	};
 }

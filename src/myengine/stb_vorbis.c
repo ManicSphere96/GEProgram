@@ -70,6 +70,11 @@
 //
 //  HEADER BEGINS HERE
 //
+#pragma warning(disable: 26812)
+#pragma warning(disable: 6385)
+#pragma warning(disable: 6386)
+#pragma warning(disable: 6255)
+#pragma warning(disable: 6001)
 
 #ifndef STB_VORBIS_INCLUDE_STB_VORBIS_H
 #define STB_VORBIS_INCLUDE_STB_VORBIS_H

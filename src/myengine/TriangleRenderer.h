@@ -17,8 +17,8 @@ namespace myengine
 		private:
 			void onDisplay();
 			void onTick();
-			std::shared_ptr<renderer::ShaderProgram> shaderProgram;
-			std::shared_ptr<renderer::VertexBuffer> vbo;
-			std::shared_ptr<renderer::VertexArray> vao;
+			std::shared_ptr<renderer::ShaderProgram> m_ShaderProgram;
+			std::shared_ptr<renderer::VertexBuffer> m_Vbo;
+			std::shared_ptr<renderer::VertexArray> m_Vao;
 	};
 }

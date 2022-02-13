@@ -13,7 +13,7 @@ namespace renderer
 			glm::vec2 getSize();
 			GLuint getId();
 		private:
-			GLuint id;
-			glm::vec2 size = { 0, 0 };
+			GLuint m_Id;
+			glm::vec2 m_Size = { 0, 0 };
 	};
 }

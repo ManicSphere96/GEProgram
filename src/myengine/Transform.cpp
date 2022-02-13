@@ -105,31 +105,31 @@ namespace myengine
 	{
 		if (m_IsPlayer)
 		{
-			for (int i = 0; i < (int)getKeyboard()->keys.size(); i++)
+			for (int i = 0; i < (int)getKeyboard()->m_Keys.size(); i++)
 			{
 				// If the player presses space it will set yMomentum to 1.25
-				if ((getKeyboard()->keys[i] == SDLK_UP))
+				if ((getKeyboard()->m_Keys[i] == SDLK_UP))
 				{
 					getTransform()->setAcceleration(glm::vec3(0, m_MoveAmount, 0));
 				}
-				else if ((getKeyboard()->keys[i] == SDLK_DOWN))
+				else if ((getKeyboard()->m_Keys[i] == SDLK_DOWN))
 				{
 					getTransform()->setAcceleration(glm::vec3(0, -m_MoveAmount, 0));
 				}
 				// This will then make the player jump
-				else if ((getKeyboard()->keys[i] == SDLK_LEFT))
+				else if ((getKeyboard()->m_Keys[i] == SDLK_LEFT))
 				{
 					getTransform()->setAcceleration(glm::vec3(-m_MoveAmount, 0, 0));
 				}
-				else if ((getKeyboard()->keys[i] == SDLK_RIGHT))
+				else if ((getKeyboard()->m_Keys[i] == SDLK_RIGHT))
 				{
 					getTransform()->setAcceleration(glm::vec3(m_MoveAmount, 0, 0));
 				}
-				else if ((getKeyboard()->keys[i] == SDLK_s))
+				else if ((getKeyboard()->m_Keys[i] == SDLK_s))
 				{
 					getTransform()->setAcceleration(glm::vec3(0, 0, -m_MoveAmount));
 				}
-				else if ((getKeyboard()->keys[i] == SDLK_w))
+				else if ((getKeyboard()->m_Keys[i] == SDLK_w))
 				{
 					getTransform()->setAcceleration(glm::vec3(0, 0, m_MoveAmount));
 				}
@@ -137,7 +137,7 @@ namespace myengine
 		}
 		if (m_CanMove)
 		{
-			m_Velocity = m_Velocity + (-m_Velocity * m_Friction);
+			m_Velocity = m_Velocity + (-m_Velocity * m_Friction *getCore()->getEnvironment()->getDeltaTime());
 			glm::vec3 deltaPos = m_Velocity * getCore()->getEnvironment()->getDeltaTime();
 			if (getCore()->getEnvironment()->getDeltaTime() == 0)
 			{

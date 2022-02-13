@@ -11,73 +11,73 @@ namespace renderer
 	{
 		/// Sets up the vertex array with a path to the model
 
-		vertCount = buLoadModel(path, &positionsVbo, &tcsVbo, &normalsVbo, &m_convexPlanes);
+		m_VertCount = buLoadModel(path, &m_PositionsVbo, &m_TcsVbo, &m_NormalsVbo, &m_ConvexPlanes);
 
-		glGenVertexArrays(1, &vaoId);
-		if (!vaoId) throw std::exception();
-		glBindVertexArray(vaoId);
+		glGenVertexArrays(1, &m_VaoId);
+		if (!m_VaoId) throw std::exception();
+		glBindVertexArray(m_VaoId);
 
-		glBindBuffer(GL_ARRAY_BUFFER, positionsVbo);
+		glBindBuffer(GL_ARRAY_BUFFER, m_PositionsVbo);
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 		glEnableVertexAttribArray(0);
 
-		glBindBuffer(GL_ARRAY_BUFFER, tcsVbo);
+		glBindBuffer(GL_ARRAY_BUFFER, m_TcsVbo);
 		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (void*)0);
 		glEnableVertexAttribArray(1);
 
-		glBindBuffer(GL_ARRAY_BUFFER, normalsVbo);
+		glBindBuffer(GL_ARRAY_BUFFER, m_NormalsVbo);
 		glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 		glEnableVertexAttribArray(2);
 
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindVertexArray(0);
 
-		dirty = false;
+		m_Dirty = false;
 	}
 
 	VertexArray::VertexArray()
 	{
 		/// Sets up the vertex array for the triangle
 
-		glGenVertexArrays(1, &vaoId);
-		vertCount = 0;
+		glGenVertexArrays(1, &m_VaoId);
+		m_VertCount = 0;
 
-		if (!vaoId)
+		if (!m_VaoId)
 		{
 			throw std::exception();
 		}
 
-		dirty = true;
-		buffers.resize(20);
+		m_Dirty = true;
+		m_Buffers.resize(20);
 	}
 
 	VertexArray::~VertexArray()
 	{
-		glDeleteVertexArrays(1, &vaoId);
-		glDeleteBuffers(1, &positionsVbo);
-		glDeleteBuffers(1, &tcsVbo);
-		glDeleteBuffers(1, &normalsVbo);
+		glDeleteVertexArrays(1, &m_VaoId);
+		glDeleteBuffers(1, &m_PositionsVbo);
+		glDeleteBuffers(1, &m_TcsVbo);
+		glDeleteBuffers(1, &m_NormalsVbo);
 	}
 
 	void VertexArray::setBuffer(int location, std::shared_ptr<VertexBuffer> buffer)
 	{
 		/// Sets the buffer count
 
-		buffers.at(location) = buffer;
+		m_Buffers.at(location) = buffer;
 
 		if (location == 0)
 		{
-			vertCount = buffer->getSize();
+			m_VertCount = buffer->getSize();
 		}
 
-		dirty = true;
+		m_Dirty = true;
 	}
 
 	size_t VertexArray::getVertCount()
 	{
 		/// Returns the vert count
 
-		return vertCount;
+		return m_VertCount;
 	}
 
 	GLuint VertexArray::getId()
@@ -87,18 +87,18 @@ namespace renderer
 		 * and returns the id
 		 */
 
-		if (dirty)
+		if (m_Dirty)
 		{
-			glBindVertexArray(vaoId);
+			glBindVertexArray(m_VaoId);
 
-			for (size_t i = 0; i < buffers.size(); i++)
+			for (size_t i = 0; i < m_Buffers.size(); i++)
 			{
-				if (!buffers.at(i))
+				if (!m_Buffers.at(i))
 					continue;
 
-				glBindBuffer(GL_ARRAY_BUFFER, buffers.at(i)->getId());
+				glBindBuffer(GL_ARRAY_BUFFER, m_Buffers.at(i)->getId());
 
-				glVertexAttribPointer((GLuint)i, buffers.at(i)->getComponents(), GL_FLOAT, GL_FALSE,
+				glVertexAttribPointer((GLuint)i, m_Buffers.at(i)->getComponents(), GL_FLOAT, GL_FALSE,
 					0, (void*)0);
 
 				glEnableVertexAttribArray((GLuint)i);
@@ -106,9 +106,9 @@ namespace renderer
 			}
 
 			glBindVertexArray(0);
-			dirty = false;
+			m_Dirty = false;
 		}
 
-		return vaoId;
+		return m_VaoId;
 	}
 }

@@ -3,13 +3,15 @@
 #include <thread>
 void GameComponent::testForDestroy()
 {
-	
-	if ((!this->getTransform()->getIsPlayer()) && (!this->getTransform()->getMovable()) && (this->getComponent<SphereCollider>()->getCanDie() == true))
+	if (this->getEntity()->getComponent <SphereCollider>() != NULL)
 	{
-		if (this->getEntity()->getComponent<SphereCollider>()->getHitCount() > 2)
+		if ((!this->getTransform()->getIsPlayer()) && (!this->getTransform()->getMovable()) && (this->getComponent<SphereCollider>()->getCanDie() == true))
 		{
-			this->getEntity()->toggleDeletion();
-			this->getEntity()->getComponent<SphereCollider>()->onDestroy();
+			if (this->getEntity()->getComponent<SphereCollider>()->getHitCount() > 2)
+			{
+				this->getEntity()->toggleDeletion();
+				this->getEntity()->getComponent<SphereCollider>()->onDestroy();
+			}
 		}
 	}
 }
@@ -23,17 +25,30 @@ void GameComponent::testForWin()
 {
 	if (getCore()->getEntityByName("EndBall")->getComponent<SphereCollider>()->getCollidedName() == "PlayerBall")
 	{
-		getCore()->getEntityByName("endscreen")->getComponent<MeshRenderer>()->VisibleToggle();
-		std::this_thread::sleep_for(std::chrono::nanoseconds(1000000000));
+		m_Win = true;
+		getCore()->getEntityByName("endscreen")->getComponent<SoundSource>()->playClip();
+		getCore()->getEntityByName("endscreen")->getComponent<MeshRenderer>()->setVisible(true);
+	}
+	if (m_Win && (addDeltaTime() > 3.0f))
+	{
 		getCore()->stop();
 	}
 
 }
 void GameComponent::testForCollision()
 {
-	if (this->getEntity()->getComponent <SphereCollider>()->getHasCollided())
+	if (this->getEntity()->getComponent <SphereCollider>() != NULL)
 	{
-		this->getEntity()->getComponent<SoundSource>()->playClip();
-		this->getEntity()->getComponent <SphereCollider>()->toggleHasCollided();
+		if (this->getEntity()->getComponent <SphereCollider>()->getHasCollided())
+		{
+			this->getEntity()->getComponent<SoundSource>()->playClip();
+			this->getEntity()->getComponent <SphereCollider>()->toggleHasCollided();
+		}
 	}
 }
+float GameComponent::addDeltaTime()
+{
+	m_AddDeltaTime += getCore()->getEnvironment()->getDeltaTime();
+	return (m_AddDeltaTime);
+}
+

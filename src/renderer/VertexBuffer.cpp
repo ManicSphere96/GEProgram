@@ -4,70 +4,70 @@ namespace renderer
 {
 	VertexBuffer::VertexBuffer()
 	{
-		glGenBuffers(1, &id);
+		glGenBuffers(1, &m_Id);
 
-		if (!id)
+		if (!m_Id)
 		{
 			throw std::exception();
 		}
 
-		components = 0;
-		dirty = true;
+		m_Components = 0;
+		m_Dirty = true;
 	}
 
 	VertexBuffer::~VertexBuffer()
 	{
-		glDeleteBuffers(1, &id);
+		glDeleteBuffers(1, &m_Id);
 	}
 
 	void VertexBuffer::add(glm::vec2 value)
 	{
 		/// Adds a glm::vec2 value to the vertex buffer
 
-		data.push_back(value.x);
-		data.push_back(value.y);
+		m_Data.push_back(value.x);
+		m_Data.push_back(value.y);
 
-		components = 2;
-		dirty = true;
+		m_Components = 2;
+		m_Dirty = true;
 	}
 
 	void VertexBuffer::add(glm::vec3 value)
 	{
 		/// Adds a glm::vec3 value to the vertex buffer
 
-		data.push_back(value.x);
-		data.push_back(value.y);
-		data.push_back(value.z);
+		m_Data.push_back(value.x);
+		m_Data.push_back(value.y);
+		m_Data.push_back(value.z);
 
-		components = 3;
-		dirty = true;
+		m_Components = 3;
+		m_Dirty = true;
 	}
 
 	void VertexBuffer::add(glm::vec4 value)
 	{
 		/// Adds a glm::vec4 value to the vertex buffer
 
-		data.push_back(value.x);
-		data.push_back(value.y);
-		data.push_back(value.z);
-		data.push_back(value.w);
+		m_Data.push_back(value.x);
+		m_Data.push_back(value.y);
+		m_Data.push_back(value.z);
+		m_Data.push_back(value.w);
 
-		components = 4;
-		dirty = true;
+		m_Components = 4;
+		m_Dirty = true;
 	}
 
 	int VertexBuffer::getComponents()
 	{
 		/// Returns the components
 
-		return components;
+		return m_Components;
 	}
 
 	size_t VertexBuffer::getSize()
 	{
 		/// Returns the components
 
-		return data.size();
+		return m_Data.size();
 	}
 
 	GLuint VertexBuffer::getId()
@@ -77,17 +77,17 @@ namespace renderer
 		 * returns the id
 		 */
 
-		if (dirty)
+		if (m_Dirty)
 		{
-			glBindBuffer(GL_ARRAY_BUFFER, id);
+			glBindBuffer(GL_ARRAY_BUFFER, m_Id);
 
-			glBufferData(GL_ARRAY_BUFFER,  sizeof(data.at(0)) * data.size(), &data.at(0), GL_STATIC_DRAW);
+			glBufferData(GL_ARRAY_BUFFER,  sizeof(m_Data.at(0)) * m_Data.size(), &m_Data.at(0), GL_STATIC_DRAW);
 
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-			dirty = false;
+			m_Dirty = false;
 		}
 
-		return id;
+		return m_Id;
 	}
 }

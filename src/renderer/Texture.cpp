@@ -18,16 +18,16 @@ namespace renderer
 		int w = 0;
 		int h = 0;
 
-		glGenTextures(1, &id);
+		glGenTextures(1, &m_Id);
 
-		if (!id)
+		if (!m_Id)
 		{
 			throw std::exception();
 		}
 
 		unsigned char* data = stbi_load(path.c_str(), &w, &h, NULL, 4);
 
-		glBindTexture(GL_TEXTURE_2D, id);
+		glBindTexture(GL_TEXTURE_2D, m_Id);
 
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA,
 			GL_UNSIGNED_BYTE, data);
@@ -43,14 +43,14 @@ namespace renderer
 	{
 		/// Returns the size of the model
 
-		return size;
+		return m_Size;
 	}
 
 	GLuint Texture::getId()
 	{
 		/// Returns the id of the texture
 
-		return id;
+		return m_Id;
 	}
 }
 

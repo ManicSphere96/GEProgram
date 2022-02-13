@@ -14,9 +14,9 @@ namespace myengine
 	public:
 		Mesh();
 		void onInit();
-		std::shared_ptr<renderer::VertexArray> getVao() { return vao;  }
+		std::shared_ptr<renderer::VertexArray> getVao() { return m_Vao;  }
 	private:
 		friend struct myengine::MeshRenderer;
-		std::shared_ptr<renderer::VertexArray> vao;
+		std::shared_ptr<renderer::VertexArray> m_Vao;
 	};
 }

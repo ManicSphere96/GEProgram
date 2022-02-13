@@ -27,7 +27,7 @@ namespace renderer
 			void setUniform(std::string name, float uniform);
 			GLuint getId();
 		private:
-			GLuint id;
-			std::vector<Sampler> samplers;
+			GLuint m_Id;
+			std::vector<Sampler> m_Samplers;
 	};
 }

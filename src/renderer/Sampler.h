@@ -9,8 +9,8 @@ namespace renderer
 	{
 		public:
 			/// The id which is used for the sampler
-			GLint id;
+			GLint m_Id;
 			/// The texture used for the sampler
-			Texture* texture;
+			Texture* m_Texture;
 	};
 }

@@ -17,7 +17,7 @@ namespace myengine
 			void setShader(std::shared_ptr<Shader> shaderProgram) { m_Program = shaderProgram; }
 			bool getVisible() { return m_IsVisible; }
 			std::shared_ptr<Mesh> getMesh() { return m_Mesh; }
-			void VisibleToggle();
+			void setVisible(bool);
 			
 		private:
 			void onDisplay();
