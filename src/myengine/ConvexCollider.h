@@ -11,7 +11,6 @@ namespace myengine
 		void onInit(std::shared_ptr<renderer::VertexArray> vao);
 		void onDestroy();
 		bool isColliding(std::shared_ptr<SphereCollider> collider);
-		void currentlyColliding(std::shared_ptr<SphereCollider> collidingObj);
 		int getHitCount() { return m_HitCount; }
 		glm::vec3 getIncident() { return m_Incident; }
 		void setIncident(glm::vec3 incident) { m_Incident = incident; }

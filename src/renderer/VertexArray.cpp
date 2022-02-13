@@ -9,7 +9,7 @@ namespace renderer
 {
 	VertexArray::VertexArray(std::string path)
 	{
-		/// Sets up the vertex array with a path to the model
+		/// Sets up the vertex array object with a path to the model and sets up my positions and normals buffers.
 
 		m_VertCount = buLoadModel(path, &m_PositionsVbo, &m_TcsVbo, &m_NormalsVbo, &m_ConvexPlanes);
 
@@ -53,6 +53,9 @@ namespace renderer
 
 	VertexArray::~VertexArray()
 	{
+		
+		/// Deletes buffers when destructing.
+		
 		glDeleteVertexArrays(1, &m_VaoId);
 		glDeleteBuffers(1, &m_PositionsVbo);
 		glDeleteBuffers(1, &m_TcsVbo);
@@ -82,10 +85,9 @@ namespace renderer
 
 	GLuint VertexArray::getId()
 	{
-		/**
-		 * \brief Sets up the vertex array
-		 * and returns the id
-		 */
+		
+		 ///brief Sets up the vertex array and returns the id
+		
 
 		if (m_Dirty)
 		{

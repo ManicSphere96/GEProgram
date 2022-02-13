@@ -55,7 +55,6 @@ add_library(myengine
 	src/myengine/SphereCollider.cpp
 	src/myengine/TextureResource.cpp
     src/myengine/Transform.cpp
-    src/myengine/TriangleRenderer.cpp
 	src/myengine/Core.h
 	src/myengine/Component.h
 	src/myengine/ConvexCollider.h
@@ -75,7 +74,6 @@ add_library(myengine
 	src/myengine/stb_vorbis.h
 	src/myengine/TextureResource.h
 	src/myengine/Transform.h
-	src/myengine/TriangleRenderer.h
 	src/myengine/stb_vorbis.c
 )
 #set_target_properties(myengine PROPERTIES COMPILE_FLAGS "-m32" LINK_FLAGS "-m32")
@@ -94,4 +92,9 @@ file (COPY sdk/Lib/glew32.dll DESTINATION ${CMAKE_BINARY_DIR}/Debug)
 file (COPY sdk/Lib/OpenAL32.dll DESTINATION ${CMAKE_BINARY_DIR}/Debug)
 file (COPY sdk/Lib/SDL2.dll DESTINATION ${CMAKE_BINARY_DIR}/Debug)
 file (COPY Assets DESTINATION ${CMAKE_BINARY_DIR}/Debug)
+file (COPY sdk/Lib/glew32.dll DESTINATION ${CMAKE_BINARY_DIR}/Release)
+file (COPY sdk/Lib/OpenAL32.dll DESTINATION ${CMAKE_BINARY_DIR}/Release)
+file (COPY sdk/Lib/SDL2.dll DESTINATION ${CMAKE_BINARY_DIR}/Release)
+file (COPY Assets DESTINATION ${CMAKE_BINARY_DIR}/Release)
+
 

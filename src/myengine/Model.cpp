@@ -8,6 +8,7 @@ namespace myengine
 	}
 	void Model::onInit(std::string path)
 	{
+		///sets the path
 		m_Path = path ;
 	}
 }

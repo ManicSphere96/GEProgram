@@ -9,6 +9,7 @@ namespace myengine
 {
 	Transform::Transform()
 	{
+		/// Initializes all values to a real position
 		m_position = glm::vec3(0, 0, 0);
 		m_rotation = glm::vec3(0, 0, 0);
 		m_scale = glm::vec3(1, 1, 1);
@@ -42,9 +43,10 @@ namespace myengine
 
 	void Transform::setAcceleration(glm::vec3 acceleration)
 	{
+		/// Sets the acceleration if it can move.
 		if (m_CanMove)
 		{
-			m_Acceleration += acceleration;
+			m_Acceleration = acceleration;
 		}
 		else
 		{
@@ -55,6 +57,7 @@ namespace myengine
 
 	void Transform::setFriction(float friction)
 	{
+		///sets the friction for the object
 		m_Friction = friction;
 	}
 
@@ -98,6 +101,7 @@ namespace myengine
 	}
 	void Transform::setScale(glm::vec3 scale)
 	{
+		///sets the friction for the object
 		 m_scale = scale;
 	}
 
@@ -105,9 +109,10 @@ namespace myengine
 	{
 		if (m_IsPlayer)
 		{
+			///Setting the Acceleration if a key is pressed.
 			for (int i = 0; i < (int)getKeyboard()->m_Keys.size(); i++)
 			{
-				// If the player presses space it will set yMomentum to 1.25
+				
 				if ((getKeyboard()->m_Keys[i] == SDLK_UP))
 				{
 					getTransform()->setAcceleration(glm::vec3(0, m_MoveAmount, 0));
@@ -137,22 +142,18 @@ namespace myengine
 		}
 		if (m_CanMove)
 		{
+			///If the Object can move then update its position based on its current acceleration and velocity.
 			m_Velocity = m_Velocity + (-m_Velocity * m_Friction *getCore()->getEnvironment()->getDeltaTime());
 			glm::vec3 deltaPos = m_Velocity * getCore()->getEnvironment()->getDeltaTime();
-			if (getCore()->getEnvironment()->getDeltaTime() == 0)
+			
+			m_Velocity = m_Velocity + (m_Acceleration * getCore()->getEnvironment()->getDeltaTime());
+			if (m_Gravity)
 			{
-				m_position = m_position + m_Velocity;
+				m_Velocity = m_Velocity + (m_GravityConst * getCore()->getEnvironment()->getDeltaTime());
 			}
-			else
-			{
-				m_Velocity = m_Velocity + (m_Acceleration * getCore()->getEnvironment()->getDeltaTime());
-				if (m_Gravity)
-				{
-					m_Velocity = m_Velocity + (m_GravityConst * getCore()->getEnvironment()->getDeltaTime());
-				}
 				
-				m_position = m_position + m_Velocity * getCore()->getEnvironment()->getDeltaTime();
-			}
+			m_position = m_position + m_Velocity * getCore()->getEnvironment()->getDeltaTime();
+			
 			if (m_Velocity != glm::vec3(0, 0, 0))
 			{
 				glm::vec3 normalDPos = glm::normalize(deltaPos);
@@ -166,6 +167,7 @@ namespace myengine
 	}
 	void Transform::setVelocity(glm::vec3 vel)
 	{
+		///sets the velocity of an object if it can move
 		if (m_CanMove) 
 		{
 			m_Velocity = vel;
@@ -178,6 +180,7 @@ namespace myengine
 	}
 	void Transform::gravityToggle()
 	{
+		/// Turns the gravity on or off
 		if (m_Gravity)
 		{
 			m_Gravity = false;
@@ -187,6 +190,7 @@ namespace myengine
 	}
 	void Transform::movableToggle()
 	{
+		/// Turns movability on or off
 		if (m_CanMove)
 		{
 			m_CanMove = false;

@@ -7,7 +7,7 @@ namespace myengine
 	{}
 	void Mesh::onInit()
 	{
-		
+		///creates a  Vertex Array Object from a path and stores it.
 		m_Vao = std::make_shared<renderer::VertexArray>(m_Path + ".obj");
 	}
 }

@@ -4,6 +4,9 @@ namespace renderer
 {
 	VertexBuffer::VertexBuffer()
 	{
+		/// <summary>
+		/// Generates A Vertex Buffer Objectand returns the ID
+		/// </summary>
 		glGenBuffers(1, &m_Id);
 
 		if (!m_Id)

@@ -20,9 +20,8 @@ namespace myengine
 
 	void Entity::tick()
 	{
-		// Runs a for loop to check each component which has 
-		// been added to the entity and then runs the tick function
-		//ci means components in the vector
+		/// Runs a for loop to check each component which has been added to the entity and then runs the tick function
+		
 		for (size_t cn = 0; cn < m_Components.size(); cn++)
 		{
 			m_Components.at(cn)->tick();
@@ -31,32 +30,20 @@ namespace myengine
 
 	void Entity::display()
 	{
-		// Runs a for loop to check each component which has 
-		// been added to the entity and then runs the display function
+		/// Runs a for loop to check each component which has been added to the entity and then runs the display function
 		for (size_t ci = 0; ci < m_Components.size(); ci++)
 		{
 			m_Components.at(ci)->onDisplay();
 		}
 	}
 
-	/*void Entity::colliding(std::shared_ptr<SphereCollider> collider)
-	{
-		for (size_t ci = 0; ci < m_Components.size(); ci++)
-		{
-			//components.at(ci)-> run something when this happens
-		}
-	}*/
-
 	Entity::~Entity()
 	{
-		/*for (size_t ci = 0; ci < m_Components.size(); ci++)
-		{
-			m_Components.at(ci)->~Component();
-		}*/
-
 	}
+
 	void Entity::toggleDeletion()
-	{
+	{ 
+		///changes delete from false to true so it can be deleted
 		if (!m_DestroyMe)
 		{
 			m_DestroyMe = true;

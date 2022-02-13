@@ -22,7 +22,6 @@
 #include "Environment.h"
 #include "Keyboard.h"
 #include "Transform.h"
-#include "TriangleRenderer.h"
 #include "Model.h"
 #include "Sound.h"
 #include "SoundSource.h"
@@ -55,8 +54,12 @@ namespace myengine
 		void stop();
 		void removeEntity(std::shared_ptr<Entity> delteentity);
 		std::shared_ptr<Entity> getEntityByName(std::string name);
+		std::string getPath(){return m_Path;}
+	
+	
 	private:
 		bool m_Running = false;
+		std::string m_Path;
 		std::vector<std::shared_ptr<ConvexCollider> > m_ConvexCollidersVect;
 		std::vector<std::shared_ptr<Entity> > m_Entities;
 		std::vector<std::shared_ptr<SphereCollider> > m_CollidersVect;

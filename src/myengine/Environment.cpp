@@ -9,6 +9,7 @@ namespace myengine
 {
 	Environment::Environment()
 	{
+		///Initializes delta time per frame
 		m_Dt = 0.033f;
 		m_Last = Clock::now();
 	}

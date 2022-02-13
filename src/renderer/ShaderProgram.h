@@ -27,7 +27,9 @@ namespace renderer
 			void setUniform(std::string name, float uniform);
 			GLuint getId();
 		private:
-			GLuint m_Id;
+			///  ID that the Shader Program uses.
+			GLuint m_Id; 
+			/// A vector of samplers for the shader program.
 			std::vector<Sampler> m_Samplers;
 	};
 }

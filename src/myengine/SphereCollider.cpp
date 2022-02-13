@@ -14,17 +14,20 @@ namespace myengine
 {
 	void SphereCollider::onInit(float radius)
 	{
+		///Registers Collider in the Vector in Core 
 		getCore()->registerCollider(getEntity()->getComponent<SphereCollider>());
 		m_Radius = radius;
 	}
 
 	void SphereCollider::onDestroy()
 	{
+		///Unregisters Collider in the Vector in Core
 		getCore()->unregisterCollider(this);
 	}
 
 	bool SphereCollider::isColliding(std::shared_ptr<SphereCollider> collider)
 	{
+		//Tests for collisipon between this collider and the given collider
 		float distancebetween = glm::distance(collider->getTransform()->getPosition(),getTransform()->getPosition());
 		if (distancebetween <= (m_Radius + collider->m_Radius))
 		{
@@ -41,16 +44,17 @@ namespace myengine
 	}
 	void SphereCollider::currentlyColliding(std::shared_ptr<SphereCollider> collidingObj)
 	{
-		
+		/// this is what affects the colliding objects velocity based on the collision.
 		glm::vec3 myVel = getTransform()->getVelocity();
 		glm::vec3 itsVel = collidingObj->getTransform()->getVelocity();
 		glm::vec3 myLoc = getTransform()->getPosition();
 		glm::vec3 itsLoc = collidingObj->getTransform()->getPosition();
+		/// setting up the incedence vector and normalizing it.
 		glm::vec3 incedenceVector = (myLoc - itsLoc);
 		incedenceVector = glm::normalize(incedenceVector);
 		if ((this->getTransform()->getMovable()) && (collidingObj->getTransform()->getMovable()))
 		{
-			
+			///if both objects can move do this
 			myVel += glm::length(itsVel) * incedenceVector;
 			this->getTransform()->setVelocity(myVel);
 
@@ -58,7 +62,8 @@ namespace myengine
 			collidingObj->getTransform()->setVelocity(itsVel);
 		}
 		else if ((this->getTransform()->getMovable()) && (!collidingObj->getTransform()->getMovable()))
-		{			
+		{	
+			///if this collider can move but the other cant do this
 			float incedenceVelScalar = glm::dot(myVel, incedenceVector);
 			if (incedenceVelScalar < -GAMMA)
 			{
@@ -75,6 +80,7 @@ namespace myengine
 		}
 		else if ((!this->getTransform()->getMovable()) && (collidingObj->getTransform()->getMovable()))
 		{
+			///if this collider cant move but the other can do this
 			float incedenceVelScalar = glm::dot(itsVel, -incedenceVector);
 			if (incedenceVelScalar < -GAMMA)
 			{
@@ -95,6 +101,7 @@ namespace myengine
 	}
 	void SphereCollider::toggleCanDie()
 	{
+		///changes the bool value m_CanDie
 		if (!m_CanDie)
 		{
 			m_CanDie = true;
@@ -106,6 +113,7 @@ namespace myengine
 	}
 	void SphereCollider::toggleHasCollided()
 	{
+		///changes the bool value m_HasCollided
 		if (!m_HasCollided)
 		{
 			m_HasCollided = true;

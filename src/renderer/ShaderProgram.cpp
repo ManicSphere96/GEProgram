@@ -10,11 +10,9 @@ namespace renderer
 	
 	ShaderProgram::ShaderProgram(std::string vert, std::string frag)
 	{
-		/**
-		 * \brief Retrieves the vertex and fragment shader files.
-		 * This will then setup them up along with any attributes
-		 * and uniforms which need to be set
-		 */
+		
+	///brief Retrieves the vertex and fragment shader files. This will then setup them up along with any attributes and uniforms which need to be set
+		
 
 		std::ifstream vertFile(vert);
 		std::string vShaderText;
@@ -112,7 +110,10 @@ namespace renderer
 		view = glm::translate(view, glm::vec3(0.0f,0.0f,-1.5f));
 
 		glm::mat4 view2(1.0f);
-		view = glm::translate(view, glm::vec3(0.0f, 0.0f, 0.0f));
+		view = glm::translate(view, glm::vec3(0.0f, -10.0f, 0.0f));
+		/// rotate camera 35 degress about the x axis (1, 0, 0)
+		view = glm::rotate(view, glm::radians(35.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+
 
 		setUniform("u_Projection", projection);
 		setUniform("u_View", view);
@@ -122,6 +123,7 @@ namespace renderer
 
 	ShaderProgram::~ShaderProgram()
 	{
+		///Deleting the whole program on destructor call 
 		glDeleteProgram(m_Id);
 	}
 
@@ -160,7 +162,7 @@ namespace renderer
 
 	void ShaderProgram::setUniform(std::string name, glm::mat4 uniform)
 	{
-		/// Sets the uniform value with the name provided by the string
+		/// Sets the uniform value with the name provided by the string using the mat4 given
 
 		glUseProgram(m_Id);
 		GLint loc = glGetUniformLocation(m_Id, name.c_str());
@@ -170,7 +172,7 @@ namespace renderer
 
 	void ShaderProgram::setUniform(std::string name, glm::vec3 uniform)
 	{
-		/// Sets the uniform value with the name provided by the string
+		/// Sets the uniform value with the name provided by the string using the vec3 given
 
 		glUseProgram(m_Id);
 		GLint loc = glGetUniformLocation(m_Id, name.c_str());
@@ -180,7 +182,7 @@ namespace renderer
 
 	void ShaderProgram::setUniform(std::string name, glm::vec4 uniform)
 	{
-		/// Sets the uniform value with the name provided by the string
+		/// Sets the uniform value with the name provided by the string using the vec4 given
 
 		glUseProgram(m_Id);
 		GLint loc = glGetUniformLocation(m_Id, name.c_str());
@@ -190,7 +192,7 @@ namespace renderer
 
 	void ShaderProgram::setUniform(std::string name, std::shared_ptr<Texture> texture)
 	{
-		/// Sets the uniform for the texture with the name provided by the string
+		/// Sets the uniform for the texture with the name provided by the string using the texture given
 
 		glUseProgram(m_Id);
 		glUniform1i(glGetUniformLocation(m_Id, name.c_str()), 0);
@@ -201,7 +203,7 @@ namespace renderer
 
 	void ShaderProgram::setUniform(std::string name, float uniform)
 	{
-		/// Sets the uniform float value with the name provided by the string
+		/// Sets the uniform float value with the name provided by the string using the float given
 
 		glUseProgram(m_Id);
 		GLint loc = glGetUniformLocation(m_Id, name.c_str());

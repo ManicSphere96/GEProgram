@@ -6,14 +6,6 @@
 
 using namespace myengine;
 
-struct EngineStopper : Component
-{
-	virtual void onTick()
-	{
-		std::cout << "Stopping!" << std::endl;
-		getCore()->stop();
-	}
-};
 
 int main()
 {
@@ -25,9 +17,10 @@ int main()
 	std::shared_ptr<Core> core = Core::initialize();
 
 	std::ifstream levelFile;
-	for(int i = 0; i < LevelList.size(); i++)
+	for(size_t i = 0; i < LevelList.size(); i++)
 	{
-		levelFile.open("Debug\\Assets\\LevelFiles\\" + LevelList[0]);
+		levelFile.open(core->getPath() + "\\Assets\\LevelFiles\\" + LevelList[0]);
+		
 
 		float x, y, z, scale, rotationX, rotationY, rotationZ, frictionConstant, colliderSize;
 		std::string entityName, model, vert, frag, texture, objSound;
@@ -49,9 +42,10 @@ int main()
 			entity->getTransform()->rotate(glm::vec3(rotationX, rotationY, rotationZ));
 			entity->getTransform()->setIsPlayer(isPlayer);
 			entity->getTransform()->setFriction(frictionConstant);
-			mr->setMesh(core->getResources()->load<Mesh>(model));
-			mr->setShader(core->getResources()->load<Shader>(vert, frag));
-			mr->setTexture(core->getResources()->load<TextureResource>(texture));
+			mr->setMesh(core->getResources()->load<Mesh>(core->getPath() + model));
+			mr->setShader(core->getResources()->load<Shader>(core->getPath() + vert, core->getPath() + frag));
+			mr->setTexture(core->getResources()->load<TextureResource>(core->getPath() + texture));
+
 			entity->setName(entityName);
 			mr->setVisible(isVisible);
 			
@@ -76,7 +70,7 @@ int main()
 				std::shared_ptr<ConvexCollider> col1 = entity->addComponent<ConvexCollider>(mr->getMesh()->getVao());
 			}
 			
-			std::shared_ptr<Sound> sound = core->getResources()->load<Sound>(objSound);
+			std::shared_ptr<Sound> sound = core->getResources()->load<Sound>(core->getPath() + objSound);
 			std::shared_ptr<SoundSource> source = entity->addComponent<SoundSource>();
 			source->setClip(sound);
 

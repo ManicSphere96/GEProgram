@@ -17,9 +17,12 @@ namespace renderer
 			size_t getSize();
 			GLuint getId();
 		private:
+			/// Vertex Buffer ID.
 			GLuint m_Id;
+			/// A vectot to store the Data of the VBO.
 			std::vector<float> m_Data;
 			bool m_Dirty;
+			/// the Number of Components.
 			int m_Components;
 	};
 }

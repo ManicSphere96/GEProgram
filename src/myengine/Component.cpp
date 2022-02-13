@@ -53,44 +53,30 @@ namespace myengine
 
 	void Component::play()
 	{
-		// Runs the onTick function
+		// Runs the onPlay function
 		onPlay();
 	}
 
 	void Component::onTick()
 	{
 		/// Runs the virtual function onTick
-
-		/**
-		* The function will run every frame 
-		* while the program is running
-		*/
+		/// The function will run every frame while the program is running
 	}
 
 	void Component::onDisplay()
 	{
 		/// Runs the virtual function onDisplay
-
-		/**
-		* The function will display a model/triangle.
-		* This will depend on which component has been used 
-		* (model/triangle renderer)
-		*/
+		///The function will display a model/triangle. This will depend on which component has been used (model/triangle renderer)
 	}
 
 	void Component::onPlay()
 	{
-
 	}
 
 	void Component::onInit()
 	{
 		/// Runs the virtual function onInit
-
-		/**
-		* The function will initialize all the values used
-		* to display a model/triangle
-		*/
+		///The function will initialize all the values used to display a model/triangle
 	}
 	Component::~Component()
 	{

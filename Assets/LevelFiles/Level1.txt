@@ -1,7 +1,7 @@
 4
-ground 0 -30 -40 15 0 -90 0 0.3 -1.0 Debug\\Assets\\models\\cube2 Debug\\Assets\\Shaders\\vertShader Debug\\Assets\\Shaders\\fragShader  Debug\\Assets\\Textures\\Whiskers_diffuse Debug\\Assets\\AudioClips\\click2 0 0 0 1 0
-EndBall 3 0 -40 1 0 0 0 0.3 1.0 Debug\\Assets\\models\\blendball Debug\\Assets\\Shaders\\vertShader Debug\\Assets\\Shaders\\fragShader  Debug\\Assets\\Textures\\Ball2 Debug\\Assets\\AudioClips\\click2 0 1 1 1 1
-endscreen 0 -3.1 -15 1.25 0 0 0 0.510 1.0 Debug\\Assets\\models\\ball Debug\\Assets\\Shaders\\vertShader Debug\\Assets\\Shaders\\fragShader  Debug\\Assets\\Textures\\Win Debug\\Assets\\AudioClips\\TadaQuiet 0 0 0 0 0
-PlayerBall 0 0 -40 1 0 0 0 0.3 1.0 Debug\\Assets\\models\\blendball Debug\\Assets\\Shaders\\vertShader Debug\\Assets\\Shaders\\fragShader  Debug\\Assets\\Textures\\Ball2 Debug\\Assets\\AudioClips\\click2 1 0 1 1 1
+ground 0 -30 -40 15 0 -90 0 0.3 -1.0 \Assets\models\cube2 \Assets\Shaders\vertShader \Assets\Shaders\fragShader  \Assets\Textures\Whiskers_diffuse \Assets\AudioClips\click2 0 0 0 1 0
+EndBall 3 0 -40 1 0 0 0 0.3 1.0 \Assets\models\blendball \Assets\Shaders\vertShader \Assets\Shaders\fragShader  \Assets\Textures\Ball2 \Assets\AudioClips\click2 0 1 1 1 1
+endscreen 0 -3.1 -15 1.25 0 0 0 0.510 1.0 \Assets\models\ball \Assets\Shaders\vertShader \Assets\Shaders\fragShader  \Assets\Textures\Win \Assets\AudioClips\TadaQuiet 0 0 0 0 0
+PlayerBall 0 0 -40 1 0 0 0 0.3 1.0 \Assets\models\blendball \Assets\Shaders\vertShader \Assets\Shaders\fragShader  \Assets\Textures\Ball2 \Assets\AudioClips\click2 1 0 1 1 1
    
    levelFile >>entityName>> x >> y >> z >> scale >> rotationX >> rotationY >> rotationZ >> frictionConstant >> colliderSize >> model >> vert >> frag >> texture >> isPlayer >> isGravity >> isMoveable >> isVisible>> candie;
