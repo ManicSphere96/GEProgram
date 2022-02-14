@@ -23,7 +23,7 @@ void GameComponent::onTick()
 }
 void GameComponent::testForWin()
 {
-	if (getCore()->getEntityByName("EndBall")->getComponent<SphereCollider>()->getCollidedName() == "PlayerBall")
+	if ((m_Win != true) && (getCore()->getEntityByName("EndBall")->getComponent<SphereCollider>()->getCollidedName() == "PlayerBall"))
 	{
 		m_Win = true;
 		getCore()->getEntityByName("endscreen")->getComponent<SoundSource>()->playClip();
