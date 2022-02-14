@@ -28,7 +28,7 @@ namespace myengine
 		std::chrono::duration<double> diff = current - m_Last;
 
 		m_Dt = (float)diff.count();
-		std::cout << "dt:" << m_Dt << std::endl;
+		//std::cout << "dt:" << m_Dt << std::endl;
 		m_Last = current;
 	}
 }

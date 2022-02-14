@@ -13,7 +13,7 @@ int main()
 	std::vector<std::string> LevelList;
 
 
-	std::cout << "Hello World!" << std::endl;
+	//std::cout << "Hello World!" << std::endl;
 
 	std::shared_ptr<Core> core = Core::initialize();
 	
@@ -24,7 +24,7 @@ int main()
 	int levelsNumber;
 	levelFileText >> levelsNumber;
 	
-	for (size_t i = 0; i < levelsNumber; i++)
+	for (int i = 0; i < levelsNumber; i++)
 	{
 		std::string levelpath;
 		levelFileText >> levelpath;

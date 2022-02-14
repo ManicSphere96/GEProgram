@@ -132,11 +132,11 @@ namespace myengine
 				}
 				else if ((getKeyboard()->m_Keys[i] == SDLK_DOWN))
 				{
-					getTransform()->setAcceleration(glm::vec3(0, 0, -m_MoveAmount));
+					getTransform()->setAcceleration(glm::vec3(0, 0, m_MoveAmount));
 				}
 				else if ((getKeyboard()->m_Keys[i] == SDLK_UP ))
 				{
-					getTransform()->setAcceleration(glm::vec3(0, 0, m_MoveAmount));
+					getTransform()->setAcceleration(glm::vec3(0, 0, -m_MoveAmount));
 				}
 			}
 		}
