@@ -9,17 +9,35 @@ using namespace myengine;
 
 int main()
 {
-	std::vector<std::string> LevelList = { "Level1.txt", "Level2.txt" };
+	
+	std::vector<std::string> LevelList;
 
 
 	std::cout << "Hello World!" << std::endl;
 
 	std::shared_ptr<Core> core = Core::initialize();
+	
+	std::ifstream levelFileText;
+	
+	levelFileText.open(core->getPath() + "\\Assets\\LevelFiles\\LevelFilesText.txt");
+	
+	int levelsNumber;
+	levelFileText >> levelsNumber;
+	
+	for (size_t i = 0; i < levelsNumber; i++)
+	{
+		std::string levelpath;
+		levelFileText >> levelpath;
+		LevelList.push_back(levelpath);
+	}
+
+
+
 
 	std::ifstream levelFile;
-	for(size_t i = 0; i < LevelList.size(); i++)
+	for(size_t i = 0 ; i < LevelList.size(); i++)
 	{
-		levelFile.open(core->getPath() + "\\Assets\\LevelFiles\\" + LevelList[0]);
+		levelFile.open(core->getPath() + "\\Assets\\LevelFiles\\" + LevelList[i]);
 		
 
 		float x, y, z, scale, rotationX, rotationY, rotationZ, frictionConstant, colliderSize;

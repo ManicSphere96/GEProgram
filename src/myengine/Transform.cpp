@@ -46,7 +46,7 @@ namespace myengine
 		/// Sets the acceleration if it can move.
 		if (m_CanMove)
 		{
-			m_Acceleration = acceleration;
+			m_Acceleration += acceleration;
 		}
 		else
 		{
@@ -113,11 +113,11 @@ namespace myengine
 			for (int i = 0; i < (int)getKeyboard()->m_Keys.size(); i++)
 			{
 				
-				if ((getKeyboard()->m_Keys[i] == SDLK_UP))
+				if ((getKeyboard()->m_Keys[i] == SDLK_w))
 				{
 					getTransform()->setAcceleration(glm::vec3(0, m_MoveAmount, 0));
 				}
-				else if ((getKeyboard()->m_Keys[i] == SDLK_DOWN))
+				else if ((getKeyboard()->m_Keys[i] == SDLK_s))
 				{
 					getTransform()->setAcceleration(glm::vec3(0, -m_MoveAmount, 0));
 				}
@@ -130,11 +130,11 @@ namespace myengine
 				{
 					getTransform()->setAcceleration(glm::vec3(m_MoveAmount, 0, 0));
 				}
-				else if ((getKeyboard()->m_Keys[i] == SDLK_s))
+				else if ((getKeyboard()->m_Keys[i] == SDLK_DOWN))
 				{
 					getTransform()->setAcceleration(glm::vec3(0, 0, -m_MoveAmount));
 				}
-				else if ((getKeyboard()->m_Keys[i] == SDLK_w))
+				else if ((getKeyboard()->m_Keys[i] == SDLK_UP ))
 				{
 					getTransform()->setAcceleration(glm::vec3(0, 0, m_MoveAmount));
 				}
