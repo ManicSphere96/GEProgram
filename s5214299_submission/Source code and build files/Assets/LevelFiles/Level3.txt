@@ -1,7 +1,0 @@
-5
-ground 		0 	-30 	-40 15 	0 -90 	0 	0.3 	-1.0 	\Assets\models\cube2 		\Assets\Shaders\vertShader \Assets\Shaders\fragShader  \Assets\Textures\felt 	\Assets\AudioClips\click2 			0 0 0 1 0
-EndBall 	3	 0 		-40 1 	0 	0 	0 	0.3 	1.0 	\Assets\models\blendball 	\Assets\Shaders\vertShader \Assets\Shaders\fragShader  \Assets\Textures\ball1 	\Assets\AudioClips\click2 			0 1 1 1 1
-endscreen 	0 	-3.1 	-15 1 	0 	0 	0 	0.5	 	1.0 	\Assets\models\ball 		\Assets\Shaders\vertShader \Assets\Shaders\fragShader  \Assets\Textures\Win 	\Assets\AudioClips\TadaQuiet 		0 0 0 0 0
-PlayerBall 	0 	 0 		-40 1 	0 	0 	0 	0.2 	1.0 	\Assets\models\blendball 	\Assets\Shaders\vertShader \Assets\Shaders\fragShader  \Assets\Textures\ball2 	\Assets\AudioClips\click2 			1 0 1 1 1
-Ball 		1.5	 0 		-40 1 	0 	0 	0 	0.3 	1.0 	\Assets\models\blendball 	\Assets\Shaders\vertShader \Assets\Shaders\fragShader  \Assets\Textures\ball3 	\Assets\AudioClips\click2 			0 1 1 1 1
-entityName>> x >> y >> z >> scale >> rotationX >> rotationY >> rotationZ >> frictionConstant >> colliderSize >> model >> vert >> frag >> texture >> isPlayer >> isGravity >> isMoveable >> isVisible>> candie;
